@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Eye, EyeOff, Briefcase, ArrowLeft, AlertCircle, Zap } from 'lucide-react';
+import { Eye, EyeOff, Briefcase, ArrowLeft, AlertCircle, Zap, Mail, Lock, User, CheckCircle } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../ui/Button';
-// import Input from '../ui/Input';
-// import { authService } from '../../lib/auth';
-// import { useToast } from '../../hooks/useToast';
+import Input from '../ui/Input';
+import { authService } from '../../../lib/auth';
+import { useToast } from '../../../hooks/useToast';
 
 const AuthPage: React.FC = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -14,7 +14,7 @@ const AuthPage: React.FC = () => {
   const [bypassMode, setBypassMode] = useState(false);
   const navigate = useNavigate();
   const { success, error: showError } = useToast();
-
+  
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -56,28 +56,23 @@ const AuthPage: React.FC = () => {
   // Bypass authentication function
   const handleBypassAuth = () => {
     setLoading(true);
-
-    // Simulate authentication delay
+    
     setTimeout(() => {
-      // Set up mock user data in localStorage
       const mockUser = {
         id: 'demo-user-123',
         email: formData.email || 'demo@example.com',
         full_name: formData.fullName || 'Demo User',
         created_at: new Date().toISOString(),
         is_demo: true,
-        onboarding_completed: false // This is key!
+        onboarding_completed: false
       };
 
-      // Store mock auth data
       localStorage.setItem('careerwise_token', 'demo-token-' + Date.now());
       localStorage.setItem('careerwise_user', JSON.stringify(mockUser));
       localStorage.setItem('careerwise_needs_onboarding', 'true');
 
       success('Demo Access Granted!', 'You are now signed in with demo mode');
       setLoading(false);
-
-      // Navigate to onboarding for demo users
       navigate('/onboarding');
     }, 1000);
   };
@@ -94,38 +89,27 @@ const AuthPage: React.FC = () => {
 
     try {
       if (isSignUp) {
-        console.log('🔄 Attempting sign up...');
         const response = await authService.signUp(formData.email, formData.password, formData.fullName);
         success('Account created successfully!', 'Welcome to CareerWise');
 
-        console.log('✅ Sign up successful, user:', response.user);
-
-        // Check if user needs onboarding
         const needsOnboarding = !response.user.onboarding_completed;
 
         if (needsOnboarding) {
-          console.log('📝 User needs onboarding, redirecting...');
           localStorage.setItem('careerwise_needs_onboarding', 'true');
           navigate('/onboarding');
         } else {
-          console.log('✅ User already onboarded, going to dashboard');
           navigate('/dashboard');
         }
       } else {
-        console.log('🔄 Attempting sign in...');
         const response = await authService.signIn(formData.email, formData.password);
         success('Welcome back!', 'You have been signed in successfully');
-        console.log('✅ Sign in successful, user:', response.user);
 
-        // Check if user needs onboarding
         const needsOnboarding = !response.user.onboarding_completed;
 
         if (needsOnboarding) {
-          console.log('📝 User needs onboarding, redirecting...');
           localStorage.setItem('careerwise_needs_onboarding', 'true');
           navigate('/onboarding');
         } else {
-          console.log('✅ User already onboarded, going to dashboard');
           navigate('/dashboard');
         }
       }
@@ -133,8 +117,6 @@ const AuthPage: React.FC = () => {
       console.error('❌ Auth error:', err);
       const errorMessage = err instanceof Error ? err.message : 'Authentication failed';
       showError('Authentication Error', errorMessage);
-
-      // Show bypass option when auth fails
       setBypassMode(true);
     } finally {
       setLoading(false);
@@ -143,7 +125,6 @@ const AuthPage: React.FC = () => {
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
-    // Clear error when user starts typing
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: '' }));
     }
@@ -165,13 +146,13 @@ const AuthPage: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50 flex flex-col">
       {/* Header */}
       <div className="flex items-center justify-between p-6">
-        <Link to="/" className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors">
-          <ArrowLeft className="h-5 w-5" />
+        <Link to="/" className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors group">
+          <ArrowLeft className="h-5 w-5 group-hover:-translate-x-1 transition-transform" />
           <span>Back to Home</span>
         </Link>
         <Link to="/" className="flex items-center space-x-2">
           <Briefcase className="h-8 w-8 text-primary-600" />
-          <span className="text-xl font-bold text-dark-900">
+          <span className="text-xl font-bold text-gray-900">
             Career<span className="text-primary-600">Wise</span>
           </span>
         </Link>
@@ -181,19 +162,26 @@ const AuthPage: React.FC = () => {
       <div className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="max-w-md w-full">
           {/* Card */}
-          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden backdrop-blur-sm">
             {/* Header */}
-            <div className="px-8 pt-8 pb-6 text-center">
-              <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="px-8 pt-8 pb-6 text-center relative">
+              {/* Background decoration */}
+              <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary-500 to-secondary-500"></div>
+              
+              <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4 relative">
                 <Briefcase className="h-8 w-8 text-primary-600" />
+                <div className="absolute -top-1 -right-1 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                  <CheckCircle className="h-4 w-4 text-white" />
+                </div>
               </div>
+              
               <h1 className="text-2xl font-bold text-gray-900 mb-2">
-                {isSignUp ? 'Create your account' : 'Welcome back'}
+                {isSignUp ? 'Join CareerWise' : 'Welcome back'}
               </h1>
               <p className="text-gray-600">
-                {isSignUp
-                  ? 'Start your career journey with AI-powered guidance'
-                  : 'Sign in to continue your career journey'
+                {isSignUp 
+                  ? 'Start your AI-powered career journey today' 
+                  : 'Continue your career development journey'
                 }
               </p>
             </div>
@@ -204,9 +192,9 @@ const AuthPage: React.FC = () => {
                 <div className="flex items-start">
                   <AlertCircle className="h-5 w-5 text-orange-600 mt-0.5 flex-shrink-0" />
                   <div className="ml-3 flex-1">
-                    <h3 className="text-sm font-medium text-orange-800">Database Connection Issue</h3>
+                    <h3 className="text-sm font-medium text-orange-800">Demo Mode Available</h3>
                     <p className="mt-1 text-sm text-orange-700">
-                      Unable to connect to the authentication service. You can continue with demo mode below.
+                      Try CareerWise instantly with our demo mode - no registration required.
                     </p>
                   </div>
                 </div>
@@ -222,9 +210,10 @@ const AuthPage: React.FC = () => {
                     type="text"
                     value={formData.fullName}
                     onChange={(e) => handleInputChange('fullName', e.target.value)}
-                    placeholder="John Doe"
+                    placeholder="Enter your full name"
                     error={errors.fullName}
                     required
+                    leftIcon={<User className="h-4 w-4 text-gray-400" />}
                   />
                 )}
 
@@ -233,9 +222,10 @@ const AuthPage: React.FC = () => {
                   type="email"
                   value={formData.email}
                   onChange={(e) => handleInputChange('email', e.target.value)}
-                  placeholder="john@example.com"
+                  placeholder="Enter your email"
                   error={errors.email}
                   required
+                  leftIcon={<Mail className="h-4 w-4 text-gray-400" />}
                 />
 
                 <Input
@@ -246,11 +236,12 @@ const AuthPage: React.FC = () => {
                   placeholder="Enter your password"
                   error={errors.password}
                   required
+                  leftIcon={<Lock className="h-4 w-4 text-gray-400" />}
                   rightIcon={
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="text-gray-400 hover:text-gray-600"
+                      className="text-gray-400 hover:text-gray-600 transition-colors"
                     >
                       {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </button>
@@ -266,6 +257,7 @@ const AuthPage: React.FC = () => {
                     placeholder="Confirm your password"
                     error={errors.confirmPassword}
                     required
+                    leftIcon={<Lock className="h-4 w-4 text-gray-400" />}
                   />
                 )}
 
@@ -278,7 +270,7 @@ const AuthPage: React.FC = () => {
                       />
                       <span className="ml-2 text-sm text-gray-600">Remember me</span>
                     </label>
-                    <a href="#" className="text-sm text-primary-600 hover:text-primary-700">
+                    <a href="#" className="text-sm text-primary-600 hover:text-primary-700 transition-colors">
                       Forgot password?
                     </a>
                   </div>
@@ -294,7 +286,6 @@ const AuthPage: React.FC = () => {
                     {isSignUp ? 'Create Account' : 'Sign In'}
                   </Button>
 
-                  {/* Bypass Button - Always visible for development */}
                   <Button
                     type="button"
                     variant="secondary"
@@ -304,7 +295,7 @@ const AuthPage: React.FC = () => {
                     size="lg"
                   >
                     <Zap className="h-4 w-4 mr-2" />
-                    Continue with Demo Mode
+                    Try Demo Mode
                   </Button>
                 </div>
               </form>
@@ -322,29 +313,29 @@ const AuthPage: React.FC = () => {
 
                 {/* Social Login */}
                 <div className="mt-6 grid grid-cols-2 gap-3">
-                  <button
+                  <button 
                     type="button"
-                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-colors"
-                    onClick={() => showError('Not Available', 'Social login will be available soon')}
+                    className="w-full inline-flex justify-center items-center py-3 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors group"
+                    onClick={() => showError('Coming Soon', 'Google sign-in will be available soon')}
                   >
-                    <svg className="h-5 w-5" viewBox="0 0 24 24">
-                      <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                      <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                      <path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                      <path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                    <svg className="h-5 w-5 mr-2" viewBox="0 0 24 24">
+                      <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                      <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                      <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                      <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                     </svg>
-                    <span className="ml-2">Google</span>
+                    Google
                   </button>
 
-                  <button
+                  <button 
                     type="button"
-                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-colors"
-                    onClick={() => showError('Not Available', 'Social login will be available soon')}
+                    className="w-full inline-flex justify-center items-center py-3 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors group"
+                    onClick={() => showError('Coming Soon', 'GitHub sign-in will be available soon')}
                   >
-                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                    <svg className="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
                     </svg>
-                    <span className="ml-2">Twitter</span>
+                    GitHub
                   </button>
                 </div>
               </div>
@@ -356,7 +347,7 @@ const AuthPage: React.FC = () => {
                   <button
                     type="button"
                     onClick={toggleMode}
-                    className="font-medium text-primary-600 hover:text-primary-700"
+                    className="font-medium text-primary-600 hover:text-primary-700 transition-colors"
                   >
                     {isSignUp ? 'Sign in' : 'Sign up'}
                   </button>
@@ -369,11 +360,12 @@ const AuthPage: React.FC = () => {
           <div className="mt-8 text-center">
             <p className="text-xs text-gray-500">
               By continuing, you agree to our{' '}
-              <a href="#" className="text-primary-600 hover:text-primary-700">Terms of Service</a>
+              <a href="#" className="text-primary-600 hover:text-primary-700 transition-colors">Terms of Service</a>
               {' '}and{' '}
-              <a href="#" className="text-primary-600 hover:text-primary-700">Privacy Policy</a>
+              <a href="#" className="text-primary-600 hover:text-primary-700 transition-colors">Privacy Policy</a>
             </p>
           </div>
+
         </div>
       </div>
     </div>
