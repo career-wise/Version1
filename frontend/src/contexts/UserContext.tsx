@@ -1,10 +1,20 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { authService } from '../lib/auth';
 
-interface UserProfile {
+interface User {
   id: string;
   email: string;
   full_name: string;
   user_type?: 'student' | 'graduate' | 'professional' | 'entrepreneur';
+  onboarding_completed?: boolean;
+  created_at: string;
+}
+
+interface UserProfile {
+  id: string;
+  full_name: string;
+  email: string;
+  user_type?: string;
   career_stage?: string;
   experience_level?: string;
   primary_goals?: string[];
@@ -15,15 +25,14 @@ interface UserProfile {
   bio?: string;
   location?: string;
   onboarding_completed?: boolean;
-  created_at: string;
 }
 
 interface UserContextType {
-  user: UserProfile | null;
+  user: User | null;
   userProfile: UserProfile | null;
   userType: string | null;
   loading: boolean;
-  setUser: (user: UserProfile | null) => void;
+  setUser: (user: User | null) => void;
   setUserProfile: (profile: UserProfile | null) => void;
   refreshUser: () => Promise<void>;
 }
@@ -35,7 +44,7 @@ interface UserProviderProps {
 }
 
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<UserProfile | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -44,23 +53,40 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const refreshUser = async () => {
     try {
       setLoading(true);
+      const currentUser = authService.getCurrentUser();
 
-      // Check localStorage for user data
-      const storedUser = localStorage.getItem('careerwise_user');
-      const storedProfile = localStorage.getItem('careerwise_user_profile');
+      if (currentUser) {
+        setUser(currentUser);
 
-      if (storedUser) {
-        const userData = JSON.parse(storedUser);
-        setUser(userData);
-        setUserProfile(userData);
-      }
+        // Try to get profile from localStorage first
+        const storedProfile = localStorage.getItem('careerwise_user_profile');
+        if (storedProfile) {
+          try {
+            const profile = JSON.parse(storedProfile);
+            setUserProfile(profile);
+          } catch (error) {
+            console.error('Error parsing stored profile:', error);
+          }
+        }
 
-      if (storedProfile) {
-        const profileData = JSON.parse(storedProfile);
-        setUserProfile(profileData);
+        // Try to fetch fresh profile from API
+        try {
+          const profile = await authService.getProfile();
+          if (profile) {
+            setUserProfile(profile);
+            localStorage.setItem('careerwise_user_profile', JSON.stringify(profile));
+          }
+        } catch (error) {
+          console.log('Could not fetch profile from API, using stored data');
+        }
+      } else {
+        setUser(null);
+        setUserProfile(null);
       }
     } catch (error) {
       console.error('Error refreshing user:', error);
+      setUser(null);
+      setUserProfile(null);
     } finally {
       setLoading(false);
     }
@@ -77,7 +103,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     loading,
     setUser,
     setUserProfile,
-    refreshUser,
+    refreshUser
   };
 
   return (

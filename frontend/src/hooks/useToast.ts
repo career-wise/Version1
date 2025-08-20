@@ -3,7 +3,7 @@ import { useState, useCallback } from 'react';
 export interface Toast {
   id: string;
   title: string;
-  description?: string;
+  message?: string;
   type: 'success' | 'error' | 'warning' | 'info';
   duration?: number;
 }
@@ -13,18 +13,15 @@ export const useToast = () => {
 
   const addToast = useCallback((toast: Omit<Toast, 'id'>) => {
     const id = Math.random().toString(36).substr(2, 9);
-    const newToast: Toast = {
-      ...toast,
-      id,
-      duration: toast.duration || 5000,
-    };
+    const newToast = { ...toast, id };
 
     setToasts(prev => [...prev, newToast]);
 
     // Auto remove after duration
+    const duration = toast.duration || 5000;
     setTimeout(() => {
-      setToasts(prev => prev.filter(t => t.id !== id));
-    }, newToast.duration);
+      removeToast(id);
+    }, duration);
 
     return id;
   }, []);
@@ -33,20 +30,20 @@ export const useToast = () => {
     setToasts(prev => prev.filter(toast => toast.id !== id));
   }, []);
 
-  const success = useCallback((title: string, description?: string) => {
-    return addToast({ title, description, type: 'success' });
+  const success = useCallback((title: string, message?: string) => {
+    return addToast({ title, message, type: 'success' });
   }, [addToast]);
 
-  const error = useCallback((title: string, description?: string) => {
-    return addToast({ title, description, type: 'error' });
+  const error = useCallback((title: string, message?: string) => {
+    return addToast({ title, message, type: 'error' });
   }, [addToast]);
 
-  const warning = useCallback((title: string, description?: string) => {
-    return addToast({ title, description, type: 'warning' });
+  const warning = useCallback((title: string, message?: string) => {
+    return addToast({ title, message, type: 'warning' });
   }, [addToast]);
 
-  const info = useCallback((title: string, description?: string) => {
-    return addToast({ title, description, type: 'info' });
+  const info = useCallback((title: string, message?: string) => {
+    return addToast({ title, message, type: 'info' });
   }, [addToast]);
 
   return {
@@ -56,6 +53,6 @@ export const useToast = () => {
     success,
     error,
     warning,
-    info,
+    info
   };
 };

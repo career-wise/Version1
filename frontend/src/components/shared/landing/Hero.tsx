@@ -38,7 +38,7 @@ const Hero: React.FC = () => {
           <div className="text-center">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
               Revolutionizing Career{' '}
-              <span className="text-gradient bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
+              <span className="text-gradient">
                 Guidance with AI
               </span>
             </h1>
