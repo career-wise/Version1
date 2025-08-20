@@ -1,30 +1,31 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles } from 'lucide-react';
-import Button from '../ui/Button';
+// Updated Hero.tsx
+import React from "react";
+import { Link } from "react-router-dom";
+import { ArrowRight, Sparkles } from "lucide-react";
+import Button from "../ui/Button";
 
 const Hero: React.FC = () => {
   const features = [
     {
-      icon: '📄',
-      label: 'Resume Builder',
-      description: 'AI-powered resume optimization'
+      icon: "📄",
+      label: "Resume Builder",
+      description: "AI-powered resume optimization",
     },
     {
-      icon: '🎯',
-      label: 'Assessments',
-      description: 'Discover your career strengths'
+      icon: "🎯",
+      label: "Assessments",
+      description: "Discover your career strengths",
     },
     {
-      icon: '🗣️',
-      label: 'Interview Prep',
-      description: 'Practice with real-time feedback'
+      icon: "🗣️",
+      label: "Interview Prep",
+      description: "Practice with real-time feedback",
     },
     {
-      icon: '🧠',
-      label: 'Learning',
-      description: 'Personalized skill development'
-    }
+      icon: "🧠",
+      label: "Learning",
+      description: "Personalized skill development",
+    },
   ];
 
   return (
@@ -37,10 +38,8 @@ const Hero: React.FC = () => {
           {/* Main content */}
           <div className="text-center">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-              Revolutionizing Career{' '}
-              <span className="text-gradient">
-                Guidance with AI
-              </span>
+              Revolutionizing Career{" "}
+              <span className="text-gradient">Guidance with AI</span>
             </h1>
 
             <p className="mt-6 max-w-2xl mx-auto text-xl text-gray-600 leading-relaxed">
@@ -61,7 +60,11 @@ const Hero: React.FC = () => {
               </Link>
 
               <Link to="/auth">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="w-full sm:w-auto"
+                >
                   <Sparkles className="h-5 w-5 mr-2" />
                   Sign In
                 </Button>
@@ -105,20 +108,41 @@ const Hero: React.FC = () => {
               <div className="relative z-10 flex items-center justify-center w-full h-full">
                 <div className="text-center text-white">
                   <div className="w-24 h-24 bg-white bg-opacity-20 rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                    <svg
+                      className="w-12 h-12"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                        clipRule="evenodd"
+                      />
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-semibold mb-2">AI-Powered Career Intelligence</h3>
-                  <p className="text-lg opacity-90">Transforming how people navigate their professional journey</p>
+                  <h3 className="text-2xl font-semibold mb-2">
+                    AI-Powered Career Intelligence
+                  </h3>
+                  <p className="text-lg opacity-90">
+                    Transforming how people navigate their professional journey
+                  </p>
                 </div>
               </div>
 
               {/* Floating elements to simulate the professional atmosphere */}
               <div className="absolute top-10 left-10 w-4 h-4 bg-white bg-opacity-30 rounded-full animate-float"></div>
-              <div className="absolute top-20 right-16 w-6 h-6 bg-white bg-opacity-20 rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
-              <div className="absolute bottom-16 left-16 w-3 h-3 bg-white bg-opacity-40 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
-              <div className="absolute bottom-20 right-10 w-5 h-5 bg-white bg-opacity-25 rounded-full animate-float" style={{ animationDelay: '0.5s' }}></div>
+              <div
+                className="absolute top-20 right-16 w-6 h-6 bg-white bg-opacity-20 rounded-full animate-float"
+                style={{ animationDelay: "1s" }}
+              ></div>
+              <div
+                className="absolute bottom-16 left-16 w-3 h-3 bg-white bg-opacity-40 rounded-full animate-float"
+                style={{ animationDelay: "2s" }}
+              ></div>
+              <div
+                className="absolute bottom-20 right-10 w-5 h-5 bg-white bg-opacity-25 rounded-full animate-float"
+                style={{ animationDelay: "0.5s" }}
+              ></div>
             </div>
           </div>
         </div>
