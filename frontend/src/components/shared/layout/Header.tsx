@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Briefcase, Menu, X } from 'lucide-react';
-import Button from '../ui/Button';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { Briefcase, Menu, X } from "lucide-react";
+import Button from "../ui/Button";
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navigation = [
-    { name: 'Home', href: '#' },
-    { name: 'Features', href: '#features' },
-    { name: 'How It Works', href: '#how-it-works' },
-    { name: 'About', href: '#about' },
-    { name: 'Contact', href: '#contact' },
+    { name: "Home", href: "#" },
+    { name: "Features", href: "#features" },
+    { name: "How It Works", href: "#how-it-works" },
+    { name: "About", href: "#about" },
+    { name: "Contact", href: "#contact" },
   ];
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
+    <header className="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -32,9 +32,10 @@ const Header: React.FC = () => {
               <a
                 key={item.name}
                 href={item.href}
-                className="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors duration-200"
+                className="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
               >
                 {item.name}
+                <span className="absolute inset-x-0 bottom-0 h-0.5 bg-primary-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
               </a>
             ))}
           </nav>
@@ -52,7 +53,7 @@ const Header: React.FC = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
+              className="p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500 transition-colors duration-200"
             >
               {isMenuOpen ? (
                 <X className="h-6 w-6" />
@@ -71,13 +72,13 @@ const Header: React.FC = () => {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-gray-600 hover:text-gray-900 block px-3 py-2 text-base font-medium transition-colors duration-200"
+                  className="text-gray-600 hover:text-gray-900 block px-3 py-2 text-base font-medium transition-colors duration-200 hover:bg-gray-50 rounded-md"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
                 </a>
               ))}
-              <div className="pt-4">
+              <div className="pt-4 px-3">
                 <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
                   <Button variant="primary" size="md" className="w-full">
                     Sign In

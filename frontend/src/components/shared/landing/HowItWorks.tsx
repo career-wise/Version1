@@ -1,26 +1,29 @@
-import React from 'react';
-import { Target, MessageCircle, Map } from 'lucide-react';
+import React from "react";
+import { Target, MessageCircle, Map } from "lucide-react";
 
 const HowItWorks: React.FC = () => {
   const steps = [
     {
-      number: '1',
+      number: "1",
       icon: <Target className="h-8 w-8 text-primary-600" />,
-      title: 'Choose Your Goal',
-      description: 'Select your career stage and define what you\'re looking to achieve.'
+      title: "Choose Your Goal",
+      description:
+        "Select your career stage and define what you're looking to achieve.",
     },
     {
-      number: '2',
+      number: "2",
       icon: <MessageCircle className="h-8 w-8 text-primary-600" />,
-      title: 'Chat with Our AI',
-      description: 'Engage with our AI assistant to discuss your background, skills, and aspirations.'
+      title: "Chat with Our AI",
+      description:
+        "Engage with our AI assistant to discuss your background, skills, and aspirations.",
     },
     {
-      number: '3',
+      number: "3",
       icon: <Map className="h-8 w-8 text-primary-600" />,
-      title: 'Get Personalized Roadmap',
-      description: 'Receive a customized action plan with practical steps to achieve your career goals.'
-    }
+      title: "Get Personalized Roadmap",
+      description:
+        "Receive a customized action plan with practical steps to achieve your career goals.",
+    },
   ];
 
   return (
@@ -32,7 +35,8 @@ const HowItWorks: React.FC = () => {
             How CareerWise Works
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Our AI-powered platform simplifies career guidance into three easy steps
+            Our AI-powered platform simplifies career guidance into three easy
+            steps
           </p>
         </div>
 
@@ -43,7 +47,9 @@ const HowItWorks: React.FC = () => {
               {/* Step Number */}
               <div className="relative mb-6">
                 <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4 relative z-10">
-                  <span className="text-2xl font-bold text-primary-600">{step.number}</span>
+                  <span className="text-2xl font-bold text-primary-600">
+                    {step.number}
+                  </span>
                 </div>
 
                 {/* Connecting line (hidden on last item) */}
@@ -77,13 +83,13 @@ const HowItWorks: React.FC = () => {
 
               {/* Content to simulate collaborative workspace */}
               <div className="relative z-10 text-center text-white">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 max-w-md mx-auto">
                   {/* Simulated interface elements */}
                   <div className="w-16 h-16 bg-white bg-opacity-20 rounded-lg flex items-center justify-center backdrop-blur-sm">
                     <div className="w-8 h-8 bg-white bg-opacity-30 rounded-full"></div>
                   </div>
-                  <div className="w-16 h-16 bg-white bg-opacity-20 rounded-lg flex items-center justify-center backdrop-blur-sm">
-                    <div className="w-8 h-1 bg-white bg-opacity-50 rounded-full mb-1"></div>
+                  <div className="w-16 h-16 bg-white bg-opacity-20 rounded-lg flex flex-col items-center justify-center backdrop-blur-sm space-y-1">
+                    <div className="w-8 h-1 bg-white bg-opacity-50 rounded-full"></div>
                     <div className="w-6 h-1 bg-white bg-opacity-30 rounded-full"></div>
                   </div>
                   <div className="w-16 h-16 bg-white bg-opacity-20 rounded-lg flex items-center justify-center backdrop-blur-sm">
@@ -93,17 +99,29 @@ const HowItWorks: React.FC = () => {
                     <div className="w-8 h-8 bg-gradient-to-br from-white/40 to-white/20 rounded-full"></div>
                   </div>
                 </div>
-                <h3 className="text-2xl font-semibold mb-2">AI-Powered Career Intelligence</h3>
+                <h3 className="text-2xl font-semibold mb-2">
+                  AI-Powered Career Intelligence
+                </h3>
                 <p className="text-lg opacity-90 max-w-2xl mx-auto">
-                  Experience the future of career guidance with our advanced AI technology
+                  Experience the future of career guidance with our advanced AI
+                  technology
                 </p>
               </div>
 
               {/* Floating particles */}
               <div className="absolute top-16 left-16 w-2 h-2 bg-white bg-opacity-40 rounded-full animate-float"></div>
-              <div className="absolute top-24 right-20 w-3 h-3 bg-white bg-opacity-30 rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
-              <div className="absolute bottom-20 left-24 w-2 h-2 bg-white bg-opacity-50 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
-              <div className="absolute bottom-16 right-16 w-3 h-3 bg-white bg-opacity-25 rounded-full animate-float" style={{ animationDelay: '0.5s' }}></div>
+              <div
+                className="absolute top-24 right-20 w-3 h-3 bg-white bg-opacity-30 rounded-full animate-float"
+                style={{ animationDelay: "1s" }}
+              ></div>
+              <div
+                className="absolute bottom-20 left-24 w-2 h-2 bg-white bg-opacity-50 rounded-full animate-float"
+                style={{ animationDelay: "2s" }}
+              ></div>
+              <div
+                className="absolute bottom-16 right-16 w-3 h-3 bg-white bg-opacity-25 rounded-full animate-float"
+                style={{ animationDelay: "0.5s" }}
+              ></div>
             </div>
           </div>
         </div>

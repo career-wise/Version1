@@ -1,4 +1,3 @@
-// Updated Hero.tsx
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Sparkles } from "lucide-react";
@@ -7,24 +6,28 @@ import Button from "../ui/Button";
 const Hero: React.FC = () => {
   const features = [
     {
-      icon: "📄",
+      icon: "CV",
       label: "Resume Builder",
-      description: "AI-powered resume optimization",
+      bgColor: "bg-blue-50",
+      iconColor: "text-blue-600",
     },
     {
       icon: "🎯",
       label: "Assessments",
-      description: "Discover your career strengths",
+      bgColor: "bg-pink-50",
+      iconColor: "text-pink-600",
     },
     {
       icon: "🗣️",
       label: "Interview Prep",
-      description: "Practice with real-time feedback",
+      bgColor: "bg-purple-50",
+      iconColor: "text-purple-600",
     },
     {
       icon: "🧠",
       label: "Learning",
-      description: "Personalized skill development",
+      bgColor: "bg-green-50",
+      iconColor: "text-green-600",
     },
   ];
 
@@ -34,25 +37,27 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-primary-50 via-white to-secondary-50"></div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="pt-16 pb-20 sm:pt-24 sm:pb-32 lg:pt-32 lg:pb-40">
+        <div className="pt-20 pb-16 sm:pt-24 sm:pb-20 lg:pt-32 lg:pb-24">
           {/* Main content */}
           <div className="text-center">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
               Revolutionizing Career{" "}
-              <span className="text-gradient">Guidance with AI</span>
+              <span className="bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent">
+                Guidance with AI
+              </span>
             </h1>
 
-            <p className="mt-6 max-w-2xl mx-auto text-xl text-gray-600 leading-relaxed">
-              Personalized insights. Smart career decisions.
-            </p>
-            <p className="max-w-2xl mx-auto text-xl text-gray-600">
-              No overwhelm.
-            </p>
+            <div className="mt-6 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-600 leading-relaxed">
+                Personalized insights. Smart career decisions.
+              </p>
+              <p className="text-xl text-gray-600">No overwhelm.</p>
+            </div>
 
             {/* CTA Buttons */}
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link to="/chat">
-                <Button size="lg" className="w-full sm:w-auto">
+                <Button size="lg" className="w-full sm:w-auto min-w-[180px]">
                   <Sparkles className="h-5 w-5 mr-2" />
                   Try AI Chat
                   <ArrowRight className="h-5 w-5 ml-2" />
@@ -63,31 +68,38 @@ const Hero: React.FC = () => {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="w-full sm:w-auto"
+                  className="w-full sm:w-auto min-w-[140px]"
                 >
-                  <Sparkles className="h-5 w-5 mr-2" />
+                  <Sparkles className="h-4 w-4 mr-2" />
                   Sign In
                 </Button>
               </Link>
             </div>
 
-            {/* Feature Icons */}
-            <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+            {/* Feature Cards */}
+            <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
               {features.map((feature, index) => (
                 <div
                   key={index}
                   className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 group cursor-pointer"
                 >
                   <div className="text-center">
-                    <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">
-                      {feature.icon}
+                    <div
+                      className={`w-14 h-14 ${feature.bgColor} rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}
+                    >
+                      {feature.icon === "CV" ? (
+                        <span
+                          className={`text-lg font-bold ${feature.iconColor}`}
+                        >
+                          CV
+                        </span>
+                      ) : (
+                        <span className="text-2xl">{feature.icon}</span>
+                      )}
                     </div>
-                    <h3 className="text-sm font-semibold text-gray-900 mb-2">
+                    <h3 className="text-sm font-semibold text-gray-900">
                       {feature.label}
                     </h3>
-                    <p className="text-xs text-gray-600 leading-relaxed">
-                      {feature.description}
-                    </p>
                   </div>
                 </div>
               ))}
@@ -129,7 +141,7 @@ const Hero: React.FC = () => {
                 </div>
               </div>
 
-              {/* Floating elements to simulate the professional atmosphere */}
+              {/* Floating elements */}
               <div className="absolute top-10 left-10 w-4 h-4 bg-white bg-opacity-30 rounded-full animate-float"></div>
               <div
                 className="absolute top-20 right-16 w-6 h-6 bg-white bg-opacity-20 rounded-full animate-float"
