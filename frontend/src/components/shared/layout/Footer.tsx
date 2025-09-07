@@ -52,7 +52,7 @@ const Footer: React.FC = () => {
               <Link to="/" className="flex items-center space-x-2">
                 <Briefcase className="h-8 w-8 text-primary-400" />
                 <span className="text-xl font-bold">
-                  Career<span className="text-primary-400">Wise</span>
+                  Careerist
                 </span>
               </Link>
 
@@ -129,7 +129,7 @@ const Footer: React.FC = () => {
                     href="mailto:info@careerwise.ai"
                     className="hover:text-white transition-colors duration-200"
                   >
-                    info@careerwise.ai
+                    info@Careerist.ai
                   </a>
                 </div>
 
@@ -147,7 +147,7 @@ const Footer: React.FC = () => {
         <div className="border-t border-gray-800 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-gray-400 text-sm">
-              © {currentYear} CareerWise AI. All rights reserved.
+              © {currentYear} Careerist AI. All rights reserved.
             </div>
 
             <div className="flex items-center space-x-6">

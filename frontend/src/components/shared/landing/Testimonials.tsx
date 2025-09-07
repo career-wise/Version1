@@ -9,7 +9,7 @@ const Testimonials: React.FC = () => {
       role: "High School Senior",
       rating: 5,
       content:
-        "CareerWise helped me decide which college majors aligned with my interests and future career goals. The AI provided personalized recommendations that I hadn't even considered!",
+        "Careerist helped me decide which college majors aligned with my interests and future career goals. The AI provided personalized recommendations that I hadn't even considered!",
     },
     {
       id: 2,
@@ -17,7 +17,7 @@ const Testimonials: React.FC = () => {
       role: "Recent Graduate",
       rating: 4,
       content:
-        "After graduation, I was overwhelmed with job options. CareerWise analyzed my skills and helped me find roles that were perfect for my background in marketing and design.",
+        "After graduation, I was overwhelmed with job options. Careerist analyzed my skills and helped me find roles that were perfect for my background in marketing and design.",
     },
     {
       id: 3,
@@ -25,7 +25,7 @@ const Testimonials: React.FC = () => {
       role: "Software Engineer",
       rating: 5,
       content:
-        "The resume guidance was a game-changer. After implementing CareerWise's suggestions, I started getting callbacks for interviews within a week!",
+        "The resume guidance was a game-changer. After implementing Careerist's suggestions, I started getting callbacks for interviews within a week!",
     },
   ];
 
@@ -33,7 +33,7 @@ const Testimonials: React.FC = () => {
     name: "Sarah Williams",
     role: "Founder, Williams Consulting",
     content:
-      "As an entrepreneur, I needed guidance on how to transition from my corporate job to starting my own business. CareerWise provided a step-by-step roadmap that made the process much easier to navigate. The AI insights were incredibly valuable for understanding market opportunities and building my business plan.",
+      "As an entrepreneur, I needed guidance on how to transition from my corporate job to starting my own business. Careerist provided a step-by-step roadmap that made the process much easier to navigate. The AI insights were incredibly valuable for understanding market opportunities and building my business plan.",
     rating: 5,
   };
 
@@ -57,7 +57,7 @@ const Testimonials: React.FC = () => {
             Success Stories
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            See how CareerWise has helped people navigate their career journeys
+            See how Careerist has helped people navigate their career journeys
           </p>
         </div>
 

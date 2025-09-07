@@ -67,7 +67,7 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ onComplete, onSkip }) =
             </div>
 
             <h1 className="text-3xl font-bold text-gray-900">
-              Welcome to CareerWise!
+              Welcome to Careerist!
             </h1>
 
             <p className="text-xl text-gray-600">

@@ -32,7 +32,7 @@ const HowItWorks: React.FC = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            How CareerWise Works
+            How Careerist Works
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Our AI-powered platform simplifies career guidance into three easy

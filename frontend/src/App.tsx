@@ -76,7 +76,7 @@ const OnboardingPage: React.FC = () => {
       localStorage.setItem("careerwise_user_profile", JSON.stringify(data));
 
       success(
-        "Welcome to CareerWise!",
+        "Welcome to Careerist!",
         "Your profile has been set up successfully."
       );
       navigate("/student-dashboard");

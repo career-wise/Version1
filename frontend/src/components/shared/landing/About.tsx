@@ -49,7 +49,7 @@ const About: React.FC = () => {
           {/* Content */}
           <div className="space-y-6">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
-              About CareerWise
+              About Careerist
             </h2>
             <p className="text-lg text-gray-600 leading-relaxed">
               Our mission is to democratize career guidance through innovative
@@ -58,7 +58,7 @@ const About: React.FC = () => {
 
             <div className="space-y-4">
               <p className="text-gray-700 leading-relaxed">
-                CareerWise was founded with a simple yet powerful vision: to
+                Careerist was founded with a simple yet powerful vision: to
                 make personalized career guidance accessible to everyone,
                 regardless of their background or resources. We combine
                 cutting-edge artificial intelligence with human expertise to

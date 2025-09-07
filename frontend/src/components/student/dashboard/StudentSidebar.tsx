@@ -49,31 +49,6 @@ const StudentSidebar: React.FC = () => {
           label: "Career Explorer",
           icon: "🔍",
         },
-        {
-          path: "/student-dashboard/exploration/interest-assessment",
-          label: "Interest Assessment",
-          icon: "❤️",
-        },
-        {
-          path: "/student-dashboard/exploration/personality-test",
-          label: "Personality Test",
-          icon: "🧠",
-        },
-        {
-          path: "/student-dashboard/exploration/strengths-finder",
-          label: "Strengths Finder",
-          icon: "💪",
-        },
-        {
-          path: "/student-dashboard/exploration/values-assessment",
-          label: "Values Assessment",
-          icon: "⭐",
-        },
-        {
-          path: "/student-dashboard/exploration/learning-style",
-          label: "Learning Style",
-          icon: "📚",
-        },
       ],
     },
     {
@@ -88,20 +63,11 @@ const StudentSidebar: React.FC = () => {
           icon: "📖",
         },
         {
-          path: "/student-dashboard/academics/gpa-goals",
-          label: "GPA Goal Setting",
-          icon: "🎯",
-        },
-        {
           path: "/student-dashboard/academics/study-skills",
           label: "Study Skills Trainer",
           icon: "📝",
         },
-        {
-          path: "/student-dashboard/academics/time-management",
-          label: "Time Management",
-          icon: "⏰",
-        },
+
         {
           path: "/student-dashboard/academics/test-prep",
           label: "Test Prep Strategies",
@@ -129,26 +95,6 @@ const StudentSidebar: React.FC = () => {
           path: "/student-dashboard/college/majors",
           label: "Major Explorer",
           icon: "🎓",
-        },
-        {
-          path: "/student-dashboard/college/prep",
-          label: "College Prep",
-          icon: "📋",
-        },
-        {
-          path: "/student-dashboard/college/timeline",
-          label: "Application Timeline",
-          icon: "📅",
-        },
-        {
-          path: "/student-dashboard/college/scholarships",
-          label: "Scholarship Finder",
-          icon: "💰",
-        },
-        {
-          path: "/student-dashboard/college/comparison",
-          label: "College Comparison",
-          icon: "⚖️",
         },
       ],
     },
@@ -197,30 +143,16 @@ const StudentSidebar: React.FC = () => {
       basePath: "/student-dashboard/learning",
       items: [
         {
-          path: "/student-dashboard/learning/paths",
-          label: "Learning Paths",
-          icon: "🛤️",
-        },
-        {
           path: "/student-dashboard/learning/courses",
           label: "Online Courses",
           icon: "🎥",
-        },
-        {
-          path: "/student-dashboard/learning/skill-building",
-          label: "Skill Building",
-          icon: "🔨",
         },
         {
           path: "/student-dashboard/learning/projects",
           label: "Project Ideas",
           icon: "💡",
         },
-        {
-          path: "/student-dashboard/learning/volunteer",
-          label: "Volunteer Opportunities",
-          icon: "🤝",
-        },
+
         {
           path: "/student-dashboard/learning/internship-prep",
           label: "Internship Prep",
@@ -244,61 +176,9 @@ const StudentSidebar: React.FC = () => {
           label: "Goal Setting",
           icon: "🎯",
         },
-        {
-          path: "/student-dashboard/planning/budgeting",
-          label: "Budgeting Basics",
-          icon: "💵",
-        },
-        {
-          path: "/student-dashboard/planning/timeline",
-          label: "Timeline Builder",
-          icon: "📊",
-        },
-        {
-          path: "/student-dashboard/planning/decisions",
-          label: "Decision Making",
-          icon: "🤔",
-        },
-        {
-          path: "/student-dashboard/planning/priorities",
-          label: "Prioritization Skills",
-          icon: "📋",
-        },
       ],
     },
-    {
-      id: "networking",
-      title: "Networking",
-      icon: <Users className="h-5 w-5" />,
-      basePath: "/student-dashboard/networking",
-      items: [
-        {
-          path: "/student-dashboard/networking/mentors",
-          label: "Mentor Finder",
-          icon: "👨‍🏫",
-        },
-        {
-          path: "/student-dashboard/networking/peers",
-          label: "Peer Groups",
-          icon: "👥",
-        },
-        {
-          path: "/student-dashboard/networking/events",
-          label: "Community Events",
-          icon: "🎪",
-        },
-        {
-          path: "/student-dashboard/networking/interviews",
-          label: "Informational Interviews",
-          icon: "💬",
-        },
-        {
-          path: "/student-dashboard/networking/basics",
-          label: "Networking Basics",
-          icon: "🤝",
-        },
-      ],
-    },
+  
     {
       id: "resources",
       title: "Resources",
@@ -332,39 +212,7 @@ const StudentSidebar: React.FC = () => {
         },
       ],
     },
-    {
-      id: "tools",
-      title: "Student Tools",
-      icon: <Wrench className="h-5 w-5" />,
-      basePath: "/student-dashboard/tools",
-      items: [
-        {
-          path: "/student-dashboard/tools/study-planner",
-          label: "Study Planner",
-          icon: "📅",
-        },
-        {
-          path: "/student-dashboard/tools/goal-tracker",
-          label: "Goal Tracker",
-          icon: "✅",
-        },
-        {
-          path: "/student-dashboard/tools/journal",
-          label: "Progress Journal",
-          icon: "📔",
-        },
-        {
-          path: "/student-dashboard/tools/quizzes",
-          label: "Career Quizzes",
-          icon: "❓",
-        },
-        {
-          path: "/student-dashboard/tools/bookmarks",
-          label: "Resource Bookmarks",
-          icon: "🔖",
-        },
-      ],
-    },
+,
   ];
 
   return (
