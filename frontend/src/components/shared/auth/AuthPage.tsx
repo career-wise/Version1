@@ -217,7 +217,7 @@ const AuthPage: React.FC = () => {
                       Demo Mode Available
                     </h3>
                     <p className="mt-1 text-sm text-orange-700">
-                      Try CareerWise instantly with our demo mode - no
+                      Try Careerist instantly with our demo mode - no
                       registration required.
                     </p>
                   </div>

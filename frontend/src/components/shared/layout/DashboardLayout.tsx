@@ -21,7 +21,7 @@ const DashboardLayout: React.FC = () => {
             </Link>
 
             <div className="flex items-center space-x-2">
-              <span className="text-lg font-semibold text-gray-900">CareerWise Dashboard</span>
+              <span className="text-lg font-semibold text-gray-900">Careerist Dashboard</span>
             </div>
 
             <Link to="/auth">
