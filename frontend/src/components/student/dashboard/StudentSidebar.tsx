@@ -10,13 +10,14 @@ import {
   Calendar,
   Users,
   Library,
-  Wrench,
   ChevronDown,
   ChevronRight,
   User,
   Settings,
   LogOut,
   Briefcase,
+  Star,
+  Bell,
 } from "lucide-react";
 
 const StudentSidebar: React.FC = () => {
@@ -48,6 +49,7 @@ const StudentSidebar: React.FC = () => {
           path: "/student-dashboard/exploration/career-explorer",
           label: "Career Explorer",
           icon: "🔍",
+          badge: "Popular",
         },
       ],
     },
@@ -66,8 +68,8 @@ const StudentSidebar: React.FC = () => {
           path: "/student-dashboard/academics/study-skills",
           label: "Study Skills Trainer",
           icon: "📝",
+          badge: "New",
         },
-
         {
           path: "/student-dashboard/academics/test-prep",
           label: "Test Prep Strategies",
@@ -152,7 +154,6 @@ const StudentSidebar: React.FC = () => {
           label: "Project Ideas",
           icon: "💡",
         },
-
         {
           path: "/student-dashboard/learning/internship-prep",
           label: "Internship Prep",
@@ -178,7 +179,6 @@ const StudentSidebar: React.FC = () => {
         },
       ],
     },
-  
     {
       id: "resources",
       title: "Resources",
@@ -212,35 +212,41 @@ const StudentSidebar: React.FC = () => {
         },
       ],
     },
-,
   ];
 
   return (
-    <div className="w-64 bg-white shadow-lg h-full flex flex-col">
+    <div className="w-64 bg-white shadow-xl h-full flex flex-col border-r border-gray-100">
       {/* Header */}
-      <div className="p-6 border-b border-gray-200">
-        <Link to="/" className="flex items-center space-x-2">
-          <Briefcase className="h-8 w-8 text-primary-600" />
-          <span className="text-xl font-bold text-gray-900">
-            Career<span className="text-primary-600">Wise</span>
-          </span>
+      <div className="p-6 border-b border-gray-100 bg-gradient-to-r from-primary-50 to-secondary-50">
+        <Link to="/" className="flex items-center space-x-3 group">
+          <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+            <Briefcase className="h-6 w-6 text-white" />
+          </div>
+          <div>
+            <span className="text-xl font-bold text-gray-900 group-hover:text-primary-600 transition-colors duration-300">
+              Careerist
+            </span>
+            <p className="text-sm text-gray-600 -mt-1">Student Dashboard</p>
+          </div>
         </Link>
-        <p className="text-sm text-gray-600 mt-2">Student Dashboard</p>
       </div>
 
       {/* Navigation */}
-      <div className="flex-1 overflow-y-auto py-4">
+      <div className="flex-1 overflow-y-auto py-4 custom-scrollbar">
         {/* Dashboard Home */}
         <Link
           to="/student-dashboard"
-          className={`flex items-center px-6 py-3 text-sm font-medium transition-colors ${
+          className={`flex items-center px-6 py-3 text-sm font-medium transition-all duration-300 group relative ${
             isActive("/student-dashboard")
-              ? "text-primary-600 bg-primary-50 border-r-2 border-primary-600"
-              : "text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+              ? "text-primary-600 bg-gradient-to-r from-primary-50 to-transparent border-r-2 border-primary-600"
+              : "text-gray-700 hover:text-primary-600 hover:bg-gray-50"
           }`}
         >
-          <Home className="h-5 w-5 mr-3" />
+          <Home className="h-5 w-5 mr-3 group-hover:scale-110 transition-transform duration-300" />
           Dashboard Home
+          {isActive("/student-dashboard") && (
+            <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-1 h-8 bg-primary-600 rounded-l-full"></div>
+          )}
         </Link>
 
         {/* Menu Sections */}
@@ -248,37 +254,55 @@ const StudentSidebar: React.FC = () => {
           <div key={section.id} className="mb-2">
             <button
               onClick={() => toggleSection(section.id)}
-              className={`w-full flex items-center justify-between px-6 py-3 text-sm font-medium transition-colors ${
+              className={`w-full flex items-center justify-between px-6 py-3 text-sm font-medium transition-all duration-300 group ${
                 isSectionActive(section.basePath)
-                  ? "text-primary-600 bg-primary-50"
-                  : "text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                  ? "text-primary-600 bg-gradient-to-r from-primary-50 to-transparent"
+                  : "text-gray-700 hover:text-primary-600 hover:bg-gray-50"
               }`}
             >
               <div className="flex items-center">
-                {section.icon}
-                <span className="ml-3">{section.title}</span>
+                <div className="mr-3 group-hover:scale-110 transition-transform duration-300">
+                  {section.icon}
+                </div>
+                <span>{section.title}</span>
               </div>
-              {expandedSections.includes(section.id) ? (
-                <ChevronDown className="h-4 w-4" />
-              ) : (
-                <ChevronRight className="h-4 w-4" />
-              )}
+              <div className="transition-transform duration-300">
+                {expandedSections.includes(section.id) ? (
+                  <ChevronDown className="h-4 w-4" />
+                ) : (
+                  <ChevronRight className="h-4 w-4" />
+                )}
+              </div>
             </button>
 
             {expandedSections.includes(section.id) && (
-              <div className="bg-gray-50">
+              <div className="bg-gradient-to-r from-gray-50 to-transparent">
                 {section.items.map((item) => (
                   <Link
                     key={item.path}
                     to={item.path}
-                    className={`flex items-center px-12 py-2 text-sm transition-colors ${
+                    className={`flex items-center px-12 py-2.5 text-sm transition-all duration-300 group relative ${
                       isActive(item.path)
-                        ? "text-primary-600 bg-primary-100 border-r-2 border-primary-600"
-                        : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                        ? "text-primary-600 bg-gradient-to-r from-primary-100 to-transparent border-r-2 border-primary-600 font-medium"
+                        : "text-gray-600 hover:text-primary-600 hover:bg-gray-100"
                     }`}
                   >
-                    <span className="mr-3">{item.icon}</span>
-                    {item.label}
+                    <span className="mr-3 text-base group-hover:scale-110 transition-transform duration-300">
+                      {item.icon}
+                    </span>
+                    <span className="flex-1">{item.label}</span>
+                    {item.badge && (
+                      <span className={`px-2 py-0.5 text-xs rounded-full font-medium ${
+                        item.badge === "New" 
+                          ? "bg-green-100 text-green-700" 
+                          : "bg-blue-100 text-blue-700"
+                      }`}>
+                        {item.badge}
+                      </span>
+                    )}
+                    {isActive(item.path) && (
+                      <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-1 h-6 bg-primary-600 rounded-l-full"></div>
+                    )}
                   </Link>
                 ))}
               </div>
@@ -288,29 +312,34 @@ const StudentSidebar: React.FC = () => {
       </div>
 
       {/* User Profile Section */}
-      <div className="border-t border-gray-200 p-4">
-        <div className="flex items-center space-x-3 mb-3">
-          <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
-            <User className="h-4 w-4 text-primary-600" />
+      <div className="border-t border-gray-100 p-4 bg-gradient-to-r from-gray-50 to-white">
+        <div className="flex items-center space-x-3 mb-4 p-3 bg-white rounded-xl shadow-sm border border-gray-100">
+          <div className="w-10 h-10 bg-gradient-to-br from-primary-100 to-secondary-100 rounded-xl flex items-center justify-center">
+            <User className="h-5 w-5 text-primary-600" />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-gray-900 truncate">
+            <p className="text-sm font-semibold text-gray-900 truncate">
               Demo Student
             </p>
             <p className="text-xs text-gray-500 truncate">High School Senior</p>
+            <div className="flex items-center mt-1">
+              <Star className="h-3 w-3 text-yellow-500 mr-1" />
+              <span className="text-xs text-gray-500">Level 3</span>
+            </div>
           </div>
+          <Bell className="h-4 w-4 text-gray-400 hover:text-primary-600 cursor-pointer transition-colors duration-300" />
         </div>
 
-        <div className="flex space-x-2">
-          <button className="flex-1 flex items-center justify-center px-3 py-2 text-xs text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors">
-            <Settings className="h-4 w-4 mr-1" />
+        <div className="grid grid-cols-2 gap-2">
+          <button className="flex items-center justify-center px-3 py-2 text-xs text-gray-600 hover:text-primary-600 hover:bg-white rounded-lg transition-all duration-300 group">
+            <Settings className="h-4 w-4 mr-1 group-hover:rotate-90 transition-transform duration-300" />
             Settings
           </button>
           <Link
             to="/"
-            className="flex-1 flex items-center justify-center px-3 py-2 text-xs text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
+            className="flex items-center justify-center px-3 py-2 text-xs text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all duration-300 group"
           >
-            <LogOut className="h-4 w-4 mr-1" />
+            <LogOut className="h-4 w-4 mr-1 group-hover:translate-x-1 transition-transform duration-300" />
             Sign Out
           </Link>
         </div>
