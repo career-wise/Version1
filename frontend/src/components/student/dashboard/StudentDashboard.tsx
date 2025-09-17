@@ -19,7 +19,7 @@ import MajorExplorer from "../college/MajorExplorer";
 // Skills Components
 import SkillDiscovery from "../skills/SkillDiscovery";
 import BasicTechSkills from "../skills/BasicTechSkills";
-import CommunicationSkills from "../skills/CommunicationSkills";
+import SoftSkills from "../skills/SoftSkills";
 import CreativeSkills from "../skills/CreativeSkills";
 import AnalyticalSkills from "../skills/AnalyticalSkills";
 import SocialSkills from "../skills/SocialSkills";
@@ -39,6 +39,7 @@ import StudyResources from "../resources/StudyResources";
 import FinancialLiteracy from "../resources/FinancialLiteracy";
 import DigitalCitizenship from "../resources/DigitalCitizenship";
 import CollegeResourceCenter from "../resources/CollegeResourceCenter";
+import DocumentManager from "../resources/DocumentManager";
 
 const StudentDashboard: React.FC = () => {
   return (
@@ -50,11 +51,6 @@ const StudentDashboard: React.FC = () => {
           <Route path="/" element={<StudentDashboardHome />} />
 
           {/* Exploration Routes */}
-          <Route
-            path="/exploration/career-explorer"
-            element={<CareerExplorer />}
-          />
-
           {/* Academic Routes */}
           <Route
             path="/academics/subject-explorer"
@@ -74,13 +70,8 @@ const StudentDashboard: React.FC = () => {
           {/* Skills Routes */}
           <Route path="/skills/discovery" element={<SkillDiscovery />} />
           <Route path="/skills/tech" element={<BasicTechSkills />} />
-          <Route
-            path="/skills/communication"
-            element={<CommunicationSkills />}
-          />
+          <Route path="/skills/soft" element={<SoftSkills />} />
           <Route path="/skills/creative" element={<CreativeSkills />} />
-          <Route path="/skills/analytical" element={<AnalyticalSkills />} />
-          <Route path="/skills/social" element={<SocialSkills />} />
 
           {/* Learning Routes */}
           <Route path="/learning/courses" element={<OnlineCourses />} />
@@ -95,6 +86,9 @@ const StudentDashboard: React.FC = () => {
           <Route path="/planning/career-path" element={<CareerPathPlanner />} />
           <Route path="/planning/goals" element={<GoalSetting />} />
 
+
+          {/* Resources Routes */}
+          <Route path="/resources/document-manager" element={<DocumentManager />} />
 
           {/* Resources Routes */}
           <Route path="/resources/career-library" element={<CareerLibrary />} />

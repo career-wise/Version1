@@ -45,13 +45,6 @@ const StudentSidebar: React.FC = () => {
       description: "Career exploration and discovery tools",
       items: [
         {
-          path: "/student-dashboard/exploration/career-explorer",
-          label: "Career Explorer",
-          icon: "🔍",
-          badge: "Popular",
-          description: "Discover careers that match your interests"
-        },
-        {
           path: "/student-dashboard/academics/subject-explorer",
           label: "Subject Explorer",
           icon: "📖",
@@ -79,40 +72,22 @@ const StudentSidebar: React.FC = () => {
       description: "Skill development and learning resources",
       items: [
         {
-          path: "/student-dashboard/skills/discovery",
-          label: "Skill Assessment",
-          icon: "🔍",
-          description: "Identify and develop your key skills"
-        },
-        {
           path: "/student-dashboard/skills/tech",
           label: "Tech Skills",
           icon: "💻",
           description: "Build essential digital literacy skills"
         },
         {
-          path: "/student-dashboard/skills/communication",
-          label: "Communication",
-          icon: "🗣️",
-          description: "Master essential communication skills"
+          path: "/student-dashboard/skills/soft",
+          label: "Soft Skills",
+          icon: "🤝",
+          description: "Develop interpersonal and communication skills"
         },
         {
           path: "/student-dashboard/skills/creative",
           label: "Creative Skills",
           icon: "🎨",
           description: "Develop artistic abilities and creative expression"
-        },
-        {
-          path: "/student-dashboard/skills/analytical",
-          label: "Analytical Skills",
-          icon: "🧮",
-          description: "Strengthen critical thinking and problem-solving"
-        },
-        {
-          path: "/student-dashboard/skills/social",
-          label: "Social Skills",
-          icon: "👥",
-          description: "Build strong interpersonal skills"
         },
         {
           path: "/student-dashboard/learning/courses",
@@ -213,6 +188,14 @@ const StudentSidebar: React.FC = () => {
         },
       ],
     },
+    {
+      id: "resources",
+      title: "Resources",
+      icon: <Library className="h-5 w-5" />,
+      basePath: "/student-dashboard/resources",
+      description: "Document management and resources",
+      items: [],
+    },
   ];
 
   return (
@@ -253,6 +236,30 @@ const StudentSidebar: React.FC = () => {
         {/* Menu Sections */}
         {menuSections.map((section) => (
           <div key={section.id} className="mb-2">
+            {/* Handle Resources as a direct button */}
+            {section.id === "resources" ? (
+              <Link
+                to="/student-dashboard/resources/document-manager"
+                className={`w-full flex items-center px-6 py-4 text-sm font-medium transition-all duration-300 group hover:bg-gray-50 ${
+                  location.pathname.startsWith("/student-dashboard/resources")
+                    ? "text-primary-600 bg-gradient-to-r from-primary-50 to-transparent border-r-2 border-primary-600"
+                    : "text-gray-700 hover:text-primary-600"
+                }`}
+              >
+                <div className="mr-3 group-hover:scale-110 transition-transform duration-300">
+                  {section.icon}
+                </div>
+                <div className="text-left">
+                  <div className="font-semibold">{section.title}</div>
+                  <div className="text-xs text-gray-500 font-normal">
+                    {section.description}
+                  </div>
+                </div>
+                {location.pathname.startsWith("/student-dashboard/resources") && (
+                  <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-1 h-8 bg-primary-600 rounded-l-full"></div>
+                )}
+              </Link>
+            ) : (
             <button
               onClick={() => toggleSection(section.id)}
               className={`w-full flex items-center justify-between px-6 py-4 text-sm font-medium transition-all duration-300 group hover:bg-gray-50 ${
@@ -280,6 +287,7 @@ const StudentSidebar: React.FC = () => {
                 )}
               </div>
             </button>
+            )}
 
             {expandedSections.includes(section.id) && (
               <div className="bg-gradient-to-r from-gray-50 to-transparent">
