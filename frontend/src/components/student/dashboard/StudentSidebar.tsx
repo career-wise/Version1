@@ -6,9 +6,7 @@ import {
   BookOpen,
   GraduationCap,
   Zap,
-  Brain,
-  Calendar,
-  Users,
+  Target,
   Library,
   ChevronDown,
   ChevronRight,
@@ -23,7 +21,7 @@ import {
 const StudentSidebar: React.FC = () => {
   const location = useLocation();
   const [expandedSections, setExpandedSections] = useState<string[]>([
-    "exploration",
+    "explore",
   ]);
 
   const toggleSection = (section: string) => {
@@ -40,175 +38,178 @@ const StudentSidebar: React.FC = () => {
 
   const menuSections = [
     {
-      id: "exploration",
-      title: "Career Exploration",
+      id: "explore",
+      title: "Explore & Discover",
       icon: <Compass className="h-5 w-5" />,
       basePath: "/student-dashboard/exploration",
+      description: "Career exploration and discovery tools",
       items: [
         {
           path: "/student-dashboard/exploration/career-explorer",
           label: "Career Explorer",
           icon: "🔍",
           badge: "Popular",
+          description: "Discover careers that match your interests"
         },
-      ],
-    },
-    {
-      id: "academics",
-      title: "Academic Planning",
-      icon: <BookOpen className="h-5 w-5" />,
-      basePath: "/student-dashboard/academics",
-      items: [
         {
           path: "/student-dashboard/academics/subject-explorer",
           label: "Subject Explorer",
           icon: "📖",
+          description: "Explore academic subjects and their career connections"
         },
-        {
-          path: "/student-dashboard/academics/study-skills",
-          label: "Study Skills Trainer",
-          icon: "📝",
-          badge: "New",
-        },
-        {
-          path: "/student-dashboard/academics/test-prep",
-          label: "Test Prep Strategies",
-          icon: "📊",
-        },
-        {
-          path: "/student-dashboard/academics/goal-tracker",
-          label: "Academic Goal Tracker",
-          icon: "✅",
-        },
-      ],
-    },
-    {
-      id: "college",
-      title: "College Planning",
-      icon: <GraduationCap className="h-5 w-5" />,
-      basePath: "/student-dashboard/college",
-      items: [
         {
           path: "/student-dashboard/college/explorer",
           label: "College Explorer",
           icon: "🏫",
+          description: "Find colleges that fit your goals"
         },
         {
           path: "/student-dashboard/college/majors",
           label: "Major Explorer",
           icon: "🎓",
+          description: "Explore academic majors and career outcomes"
         },
       ],
     },
     {
-      id: "skills",
-      title: "Skill Development",
+      id: "learn",
+      title: "Learn & Develop",
       icon: <Zap className="h-5 w-5" />,
       basePath: "/student-dashboard/skills",
+      description: "Skill development and learning resources",
       items: [
         {
           path: "/student-dashboard/skills/discovery",
-          label: "Skill Discovery",
+          label: "Skill Assessment",
           icon: "🔍",
+          description: "Identify and develop your key skills"
         },
         {
           path: "/student-dashboard/skills/tech",
-          label: "Basic Tech Skills",
+          label: "Tech Skills",
           icon: "💻",
+          description: "Build essential digital literacy skills"
         },
         {
           path: "/student-dashboard/skills/communication",
-          label: "Communication Skills",
+          label: "Communication",
           icon: "🗣️",
+          description: "Master essential communication skills"
         },
         {
           path: "/student-dashboard/skills/creative",
           label: "Creative Skills",
           icon: "🎨",
+          description: "Develop artistic abilities and creative expression"
         },
         {
           path: "/student-dashboard/skills/analytical",
           label: "Analytical Skills",
           icon: "🧮",
+          description: "Strengthen critical thinking and problem-solving"
         },
         {
           path: "/student-dashboard/skills/social",
           label: "Social Skills",
           icon: "👥",
+          description: "Build strong interpersonal skills"
         },
-      ],
-    },
-    {
-      id: "learning",
-      title: "Learning Resources",
-      icon: <Brain className="h-5 w-5" />,
-      basePath: "/student-dashboard/learning",
-      items: [
         {
           path: "/student-dashboard/learning/courses",
           label: "Online Courses",
           icon: "🎥",
+          description: "High-quality online courses to supplement education"
         },
         {
           path: "/student-dashboard/learning/projects",
           label: "Project Ideas",
           icon: "💡",
-        },
-        {
-          path: "/student-dashboard/learning/internship-prep",
-          label: "Internship Prep",
-          icon: "👔",
+          description: "Creative projects to build skills and portfolio"
         },
       ],
     },
     {
-      id: "planning",
-      title: "Future Planning",
-      icon: <Calendar className="h-5 w-5" />,
-      basePath: "/student-dashboard/planning",
+      id: "succeed",
+      title: "Study & Succeed",
+      icon: <BookOpen className="h-5 w-5" />,
+      basePath: "/student-dashboard/academics",
+      description: "Academic success and study tools",
       items: [
+        {
+          path: "/student-dashboard/academics/study-skills",
+          label: "Study Skills Trainer",
+          icon: "📝",
+          badge: "New",
+          description: "Master effective study techniques"
+        },
+        {
+          path: "/student-dashboard/academics/test-prep",
+          label: "Test Prep Strategies",
+          icon: "📊",
+          description: "Prepare for standardized tests"
+        },
+        {
+          path: "/student-dashboard/academics/goal-tracker",
+          label: "Goal Tracker",
+          icon: "✅",
+          description: "Track academic and personal goals"
+        },
         {
           path: "/student-dashboard/planning/career-path",
           label: "Career Path Planner",
           icon: "🗺️",
+          description: "Plan your educational and career journey"
         },
         {
           path: "/student-dashboard/planning/goals",
           label: "Goal Setting",
           icon: "🎯",
+          description: "Set and track your objectives"
         },
       ],
     },
     {
-      id: "resources",
-      title: "Resources",
-      icon: <Library className="h-5 w-5" />,
-      basePath: "/student-dashboard/resources",
+      id: "prepare",
+      title: "Prepare for Future",
+      icon: <Target className="h-5 w-5" />,
+      basePath: "/student-dashboard/learning",
+      description: "Future preparation and career readiness",
       items: [
         {
-          path: "/student-dashboard/resources/career-library",
-          label: "Career Library",
-          icon: "📚",
-        },
-        {
-          path: "/student-dashboard/resources/study",
-          label: "Study Resources",
-          icon: "📖",
+          path: "/student-dashboard/learning/internship-prep",
+          label: "Internship Prep",
+          icon: "👔",
+          description: "Get ready for professional internships"
         },
         {
           path: "/student-dashboard/resources/financial",
           label: "Financial Literacy",
           icon: "💰",
+          description: "Essential money management skills"
         },
         {
           path: "/student-dashboard/resources/digital",
           label: "Digital Citizenship",
           icon: "🌐",
+          description: "Learn to be a responsible digital citizen"
+        },
+        {
+          path: "/student-dashboard/resources/career-library",
+          label: "Career Library",
+          icon: "📚",
+          description: "Comprehensive career resources and guides"
+        },
+        {
+          path: "/student-dashboard/resources/study",
+          label: "Study Resources",
+          icon: "📖",
+          description: "Tools and materials to enhance learning"
         },
         {
           path: "/student-dashboard/resources/college",
-          label: "College Resource Center",
+          label: "College Resources",
           icon: "🏛️",
+          description: "College planning and application resources"
         },
       ],
     },
@@ -254,19 +255,24 @@ const StudentSidebar: React.FC = () => {
           <div key={section.id} className="mb-2">
             <button
               onClick={() => toggleSection(section.id)}
-              className={`w-full flex items-center justify-between px-6 py-3 text-sm font-medium transition-all duration-300 group ${
+              className={`w-full flex items-center justify-between px-6 py-4 text-sm font-medium transition-all duration-300 group hover:bg-gray-50 ${
                 isSectionActive(section.basePath)
                   ? "text-primary-600 bg-gradient-to-r from-primary-50 to-transparent"
-                  : "text-gray-700 hover:text-primary-600 hover:bg-gray-50"
+                  : "text-gray-700 hover:text-primary-600"
               }`}
             >
               <div className="flex items-center">
                 <div className="mr-3 group-hover:scale-110 transition-transform duration-300">
                   {section.icon}
                 </div>
-                <span>{section.title}</span>
+                <div className="text-left">
+                  <div className="font-semibold">{section.title}</div>
+                  <div className="text-xs text-gray-500 font-normal">
+                    {section.description}
+                  </div>
+                </div>
               </div>
-              <div className="transition-transform duration-300">
+              <div className="transition-transform duration-300 ml-2">
                 {expandedSections.includes(section.id) ? (
                   <ChevronDown className="h-4 w-4" />
                 ) : (
@@ -281,25 +287,32 @@ const StudentSidebar: React.FC = () => {
                   <Link
                     key={item.path}
                     to={item.path}
-                    className={`flex items-center px-12 py-2.5 text-sm transition-all duration-300 group relative ${
+                    className={`flex items-start px-12 py-3 text-sm transition-all duration-300 group relative hover:bg-gray-100 ${
                       isActive(item.path)
                         ? "text-primary-600 bg-gradient-to-r from-primary-100 to-transparent border-r-2 border-primary-600 font-medium"
-                        : "text-gray-600 hover:text-primary-600 hover:bg-gray-100"
+                        : "text-gray-600 hover:text-primary-600"
                     }`}
                   >
-                    <span className="mr-3 text-base group-hover:scale-110 transition-transform duration-300">
+                    <span className="mr-3 text-base group-hover:scale-110 transition-transform duration-300 flex-shrink-0 mt-0.5">
                       {item.icon}
                     </span>
-                    <span className="flex-1">{item.label}</span>
-                    {item.badge && (
-                      <span className={`px-2 py-0.5 text-xs rounded-full font-medium ${
-                        item.badge === "New" 
-                          ? "bg-green-100 text-green-700" 
-                          : "bg-blue-100 text-blue-700"
-                      }`}>
-                        {item.badge}
-                      </span>
-                    )}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center">
+                        <span className="font-medium">{item.label}</span>
+                        {item.badge && (
+                          <span className={`ml-2 px-2 py-0.5 text-xs rounded-full font-medium ${
+                            item.badge === "New" 
+                              ? "bg-green-100 text-green-700" 
+                              : "bg-blue-100 text-blue-700"
+                          }`}>
+                            {item.badge}
+                          </span>
+                        )}
+                      </div>
+                      <div className="text-xs text-gray-500 mt-0.5 leading-tight">
+                        {item.description}
+                      </div>
+                    </div>
                     {isActive(item.path) && (
                       <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-1 h-6 bg-primary-600 rounded-l-full"></div>
                     )}
