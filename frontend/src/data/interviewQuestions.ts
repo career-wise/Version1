@@ -83,48 +83,6 @@ export const interviewQuestions: InterviewQuestion[] = [
       'Show self-awareness'
     ]
   },
-  {
-    id: 'college_006',
-    text: 'What is your greatest accomplishment?',
-    category: 'Achievements',
-    type: 'college',
-    difficulty: 'medium',
-    timeLimit: 150,
-    tags: ['achievements', 'pride', 'success'],
-    tips: [
-      'Choose something meaningful to you',
-      'Explain why it matters',
-      'Show the impact it had'
-    ]
-  },
-  {
-    id: 'college_007',
-    text: 'How would your friends describe you?',
-    category: 'Personal',
-    type: 'college',
-    difficulty: 'easy',
-    timeLimit: 90,
-    tags: ['personality', 'relationships', 'self-awareness'],
-    tips: [
-      'Be authentic and honest',
-      'Use specific examples',
-      'Show positive qualities'
-    ]
-  },
-  {
-    id: 'college_008',
-    text: 'What book, movie, or experience has influenced you the most?',
-    category: 'Influences',
-    type: 'college',
-    difficulty: 'medium',
-    timeLimit: 180,
-    tags: ['influences', 'growth', 'reflection'],
-    tips: [
-      'Choose something genuinely meaningful',
-      'Explain the specific impact',
-      'Connect to your values or goals'
-    ]
-  },
 
   // Job Interview Questions
   {
@@ -195,76 +153,6 @@ export const interviewQuestions: InterviewQuestion[] = [
       'Align with the company\'s growth opportunities',
       'Show ambition but be realistic',
       'Demonstrate commitment to growth'
-    ]
-  },
-  {
-    id: 'job_006',
-    text: 'Describe a challenging situation you faced and how you handled it.',
-    category: 'Problem Solving',
-    type: 'job',
-    difficulty: 'hard',
-    timeLimit: 180,
-    tags: ['problem-solving', 'challenges', 'resilience'],
-    tips: [
-      'Choose a relevant professional example',
-      'Focus on your problem-solving process',
-      'Highlight the positive outcome'
-    ]
-  },
-  {
-    id: 'job_007',
-    text: 'Why should we hire you?',
-    category: 'Value Proposition',
-    type: 'job',
-    difficulty: 'hard',
-    timeLimit: 120,
-    tags: ['value', 'unique-selling-point', 'confidence'],
-    tips: [
-      'Summarize your key qualifications',
-      'Highlight what makes you unique',
-      'Connect directly to their needs'
-    ]
-  },
-  {
-    id: 'job_008',
-    text: 'Tell me about a time you failed or made a mistake.',
-    category: 'Learning',
-    type: 'job',
-    difficulty: 'hard',
-    timeLimit: 150,
-    tags: ['failure', 'learning', 'growth'],
-    tips: [
-      'Choose a real but not catastrophic example',
-      'Focus on what you learned',
-      'Show how you\'ve improved since'
-    ]
-  },
-  {
-    id: 'job_009',
-    text: 'How do you handle stress and pressure?',
-    category: 'Work Style',
-    type: 'job',
-    difficulty: 'medium',
-    timeLimit: 120,
-    tags: ['stress-management', 'pressure', 'coping'],
-    tips: [
-      'Provide specific strategies',
-      'Give examples from work or school',
-      'Show you can perform under pressure'
-    ]
-  },
-  {
-    id: 'job_010',
-    text: 'Do you have any questions for us?',
-    category: 'Questions',
-    type: 'job',
-    difficulty: 'easy',
-    timeLimit: 180,
-    tags: ['questions', 'curiosity', 'engagement'],
-    tips: [
-      'Always have thoughtful questions prepared',
-      'Ask about the role, team, or company culture',
-      'Show genuine interest and engagement'
     ]
   }
 ];

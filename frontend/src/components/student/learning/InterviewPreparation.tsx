@@ -179,12 +179,10 @@ const InterviewPreparation: React.FC = () => {
       </div>
 
       {/* Practice Modal */}
-      {showPracticeModal && (
-        <InterviewPracticeModal
-          isOpen={showPracticeModal}
-          onClose={() => setShowPracticeModal(false)}
-        />
-      )}
+      <InterviewPracticeModal
+        isOpen={showPracticeModal}
+        onClose={() => setShowPracticeModal(false)}
+      />
     </div>
   );
 };
