@@ -45,12 +45,6 @@ const StudentSidebar: React.FC = () => {
       description: "Career exploration and discovery tools",
       items: [
         {
-          path: "/student-dashboard/academics/subject-explorer",
-          label: "Subject Explorer",
-          icon: "📖",
-          description: "Explore academic subjects and their career connections"
-        },
-        {
           path: "/student-dashboard/college/explorer",
           label: "College Explorer",
           icon: "🏫",
@@ -111,6 +105,12 @@ const StudentSidebar: React.FC = () => {
       description: "Academic success and study tools",
       items: [
         {
+          path: "/student-dashboard/academics/study-resources",
+          label: "Study Resources",
+          icon: "📖",
+          description: "Tools and materials to enhance learning"
+        },
+        {
           path: "/student-dashboard/academics/study-skills",
           label: "Study Skills Trainer",
           icon: "📝",
@@ -122,18 +122,6 @@ const StudentSidebar: React.FC = () => {
           label: "Test Prep Strategies",
           icon: "📊",
           description: "Prepare for standardized tests"
-        },
-        {
-          path: "/student-dashboard/academics/goal-tracker",
-          label: "Goal Tracker",
-          icon: "✅",
-          description: "Track academic and personal goals"
-        },
-        {
-          path: "/student-dashboard/planning/career-path",
-          label: "Career Path Planner",
-          icon: "🗺️",
-          description: "Plan your educational and career journey"
         },
         {
           path: "/student-dashboard/planning/goals",
@@ -157,10 +145,10 @@ const StudentSidebar: React.FC = () => {
           description: "AI-powered interview practice and coaching"
         },
         {
-          path: "/student-dashboard/resources/study",
-          label: "Study Resources",
-          icon: "📖",
-          description: "Tools and materials to enhance learning"
+          path: "/student-dashboard/planning/career-path",
+          label: "Career Path Planner",
+          icon: "🗺️",
+          description: "Plan your educational and career journey"
         },
       ],
     },

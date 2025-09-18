@@ -50,12 +50,14 @@ const StudentDashboard: React.FC = () => {
             path="/academics/subject-explorer"
             element={<SubjectExplorer />}
           />
+          <Route path="/academics/study-skills" element={<StudySkillsTrainer />} />
 
           <Route path="/academics/test-prep" element={<TestPrepStrategies />} />
           <Route
             path="/academics/goal-tracker"
             element={<AcademicGoalTracker />}
           />
+          <Route path="/resources/study" element={<StudyResources />} />
 
           {/* College Routes */}
           <Route path="/college/explorer" element={<CollegeExplorer />} />
@@ -79,12 +81,9 @@ const StudentDashboard: React.FC = () => {
           {/* Planning Routes */}
           <Route path="/planning/career-path" element={<CareerPathPlanner />} />
           <Route path="/planning/goals" element={<GoalSetting />} />
-
-
+          
           {/* Resources Routes */}
           <Route path="/resources/document-manager" element={<DocumentManager />} />
-
-          <Route path="/resources/study" element={<StudyResources />} />
 
         </Routes>
       </div>
