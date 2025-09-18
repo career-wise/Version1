@@ -21,8 +21,6 @@ import SkillDiscovery from "../skills/SkillDiscovery";
 import BasicTechSkills from "../skills/BasicTechSkills";
 import SoftSkills from "../skills/SoftSkills";
 import CreativeSkills from "../skills/CreativeSkills";
-import AnalyticalSkills from "../skills/AnalyticalSkills";
-import SocialSkills from "../skills/SocialSkills";
 
 // Learning Components
 import OnlineCourses from "../learning/OnlineCourses";
@@ -31,14 +29,10 @@ import InterviewPreparation from "../learning/InterviewPreparation";
 
 // Planning Components
 import CareerPathPlanner from "../planning/CareerPathPlanner";
-import GoalSetting from "../planning/GoalSetting";
+import { GoalSetting } from "../planning/GoalSetting";
 
 // Resources Components
-import CareerLibrary from "../resources/CareerLibrary";
 import StudyResources from "../resources/StudyResources";
-import FinancialLiteracy from "../resources/FinancialLiteracy";
-import DigitalCitizenship from "../resources/DigitalCitizenship";
-import CollegeResourceCenter from "../resources/CollegeResourceCenter";
 import DocumentManager from "../resources/DocumentManager";
 
 const StudentDashboard: React.FC = () => {
@@ -90,15 +84,7 @@ const StudentDashboard: React.FC = () => {
           {/* Resources Routes */}
           <Route path="/resources/document-manager" element={<DocumentManager />} />
 
-          {/* Resources Routes */}
-          <Route path="/resources/career-library" element={<CareerLibrary />} />
           <Route path="/resources/study" element={<StudyResources />} />
-          <Route path="/resources/financial" element={<FinancialLiteracy />} />
-          <Route path="/resources/digital" element={<DigitalCitizenship />} />
-          <Route
-            path="/resources/college"
-            element={<CollegeResourceCenter />}
-          />
 
         </Routes>
       </div>

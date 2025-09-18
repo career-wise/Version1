@@ -31,13 +31,15 @@ const StudentDashboardHome: React.FC = () => {
       progress: 0,
     },
     {
-      title: "Explore Colleges",
-      description: "Find colleges that fit your goals",
-      icon: <GraduationCap className="h-8 w-8 text-purple-600" />,
-      path: "/student-dashboard/college/explorer",
+      title: "AI Career Chat",
+      description: "Get personalized career advice instantly",
+      icon: <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-full flex items-center justify-center">
+        <span className="text-white text-sm font-bold">AI</span>
+      </div>,
+      path: "/chat",
       color: "bg-gradient-to-br from-purple-50 to-violet-100",
       hoverColor: "hover:from-purple-100 hover:to-violet-200",
-      progress: 25,
+      progress: 0,
     },
     {
       title: "Develop Skills",
@@ -49,10 +51,10 @@ const StudentDashboardHome: React.FC = () => {
       progress: 60,
     },
     {
-      title: "Manage Documents",
-      description: "Upload and organize your certificates",
+      title: "Plan Your Future",
+      description: "Set goals and plan your career path",
       icon: <Target className="h-8 w-8 text-orange-600" />,
-      path: "/student-dashboard/resources/document-manager",
+      path: "/student-dashboard/planning/goals",
       color: "bg-gradient-to-br from-orange-50 to-red-100",
       hoverColor: "hover:from-orange-100 hover:to-red-200",
       progress: 40,

@@ -157,34 +157,10 @@ const StudentSidebar: React.FC = () => {
           description: "AI-powered interview practice and coaching"
         },
         {
-          path: "/student-dashboard/resources/financial",
-          label: "Financial Literacy",
-          icon: "💰",
-          description: "Essential money management skills"
-        },
-        {
-          path: "/student-dashboard/resources/digital",
-          label: "Digital Citizenship",
-          icon: "🌐",
-          description: "Learn to be a responsible digital citizen"
-        },
-        {
-          path: "/student-dashboard/resources/career-library",
-          label: "Career Library",
-          icon: "📚",
-          description: "Comprehensive career resources and guides"
-        },
-        {
           path: "/student-dashboard/resources/study",
           label: "Study Resources",
           icon: "📖",
           description: "Tools and materials to enhance learning"
-        },
-        {
-          path: "/student-dashboard/resources/college",
-          label: "College Resources",
-          icon: "🏛️",
-          description: "College planning and application resources"
         },
       ],
     },
@@ -231,6 +207,18 @@ const StudentSidebar: React.FC = () => {
           {isActive("/student-dashboard") && (
             <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-1 h-8 bg-primary-600 rounded-l-full"></div>
           )}
+        </Link>
+
+        {/* AI Chat */}
+        <Link
+          to="/chat"
+          className="flex items-center px-6 py-3 text-sm font-medium transition-all duration-300 group relative text-gray-700 hover:text-primary-600 hover:bg-gray-50"
+        >
+          <div className="w-5 h-5 mr-3 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <span className="text-white text-xs">AI</span>
+          </div>
+          AI Career Chat
+          <div className="w-2 h-2 bg-green-500 rounded-full ml-auto animate-pulse"></div>
         </Link>
 
         {/* Menu Sections */}
