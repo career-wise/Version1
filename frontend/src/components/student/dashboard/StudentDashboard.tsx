@@ -27,7 +27,7 @@ import SocialSkills from "../skills/SocialSkills";
 // Learning Components
 import OnlineCourses from "../learning/OnlineCourses";
 import ProjectIdeas from "../learning/ProjectIdeas";
-import InternshipPrep from "../learning/InternshipPrep";
+import InterviewPreparation from "../learning/InterviewPreparation";
 
 // Planning Components
 import CareerPathPlanner from "../planning/CareerPathPlanner";
@@ -78,8 +78,8 @@ const StudentDashboard: React.FC = () => {
           <Route path="/learning/projects" element={<ProjectIdeas />} />
 
           <Route
-            path="/learning/internship-prep"
-            element={<InternshipPrep />}
+            path="/learning/interview-prep"
+            element={<InterviewPreparation />}
           />
 
           {/* Planning Routes */}

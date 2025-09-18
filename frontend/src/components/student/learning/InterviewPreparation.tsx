@@ -23,13 +23,13 @@ import Card from "../../shared/ui/Card";
 import Button from "../../shared/ui/Button";
 import InterviewPracticeModal from "./InterviewPracticeModal";
 
-const InterviewPrep: React.FC = () => {
+const InterviewPreparation: React.FC = () => {
   const [showPracticeModal, setShowPracticeModal] = useState(false);
 
   const prepSteps = [
     {
       title: "Research Opportunities",
-      description: "Find internships that align with your interests and career goals",
+      description: "Find internships and jobs that align with your interests and career goals",
       icon: <Target className="h-8 w-8 text-blue-600" />,
       tasks: [
         "Identify target companies",
@@ -189,4 +189,4 @@ const InterviewPrep: React.FC = () => {
   );
 };
 
-export default InterviewPrep;
+export default InterviewPreparation;

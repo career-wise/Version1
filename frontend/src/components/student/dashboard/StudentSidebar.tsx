@@ -151,10 +151,10 @@ const StudentSidebar: React.FC = () => {
       description: "Future preparation and career readiness",
       items: [
         {
-          path: "/student-dashboard/learning/internship-prep",
-          label: "Internship Prep",
-          icon: "👔",
-          description: "Get ready for professional internships"
+          path: "/student-dashboard/learning/interview-prep",
+          label: "Interview Preparation",
+          icon: "🎤",
+          description: "AI-powered interview practice and coaching"
         },
         {
           path: "/student-dashboard/resources/financial",
