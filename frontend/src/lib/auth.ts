@@ -1,5 +1,6 @@
 // Mock authentication service that works without backend
 // This will be replaced with real Supabase integration later
+import { apiClient } from './api';
 
 interface User {
   id: string;
@@ -39,57 +40,93 @@ class AuthService {
 
   // Mock sign up
   async signUp(email: string, password: string, fullName: string): Promise<AuthResponse> {
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      const response = await apiClient.signUp(email, password, fullName);
+      
+      // Store in localStorage
+      localStorage.setItem(this.TOKEN_KEY, response.token);
+      localStorage.setItem(this.USER_KEY, JSON.stringify(response.user));
+      localStorage.setItem('careerwise_needs_onboarding', 'true');
+      
+      // Set token in API client
+      apiClient.setToken(response.token);
 
-    const user: User = {
-      id: `user_${Date.now()}`,
-      email,
-      full_name: fullName,
-      created_at: new Date().toISOString(),
-      onboarding_completed: false
-    };
+      return { user: response.user, token: response.token };
+    } catch (error) {
+      // Fallback to mock for demo
+      console.warn('API signup failed, using mock:', error);
+      
+      const user: User = {
+        id: `user_${Date.now()}`,
+        email,
+        full_name: fullName,
+        created_at: new Date().toISOString(),
+        onboarding_completed: false
+      };
 
-    const token = `token_${Date.now()}`;
+      const token = `token_${Date.now()}`;
 
-    // Store in localStorage
-    localStorage.setItem(this.TOKEN_KEY, token);
-    localStorage.setItem(this.USER_KEY, JSON.stringify(user));
-    localStorage.setItem('careerwise_needs_onboarding', 'true');
+      localStorage.setItem(this.TOKEN_KEY, token);
+      localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+      localStorage.setItem('careerwise_needs_onboarding', 'true');
 
-    return { user, token };
+      return { user, token };
+    }
   }
 
   // Mock sign in
   async signIn(email: string, password: string): Promise<AuthResponse> {
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      const response = await apiClient.signIn(email, password);
+      
+      // Store in localStorage
+      localStorage.setItem(this.TOKEN_KEY, response.token);
+      localStorage.setItem(this.USER_KEY, JSON.stringify(response.user));
+      localStorage.setItem('careerwise_needs_onboarding', 'true');
+      
+      // Set token in API client
+      apiClient.setToken(response.token);
 
-    const user: User = {
-      id: `user_${Date.now()}`,
-      email,
-      full_name: email.split('@')[0], // Use email prefix as name
-      created_at: new Date().toISOString(),
-      onboarding_completed: false
-    };
+      return { user: response.user, token: response.token };
+    } catch (error) {
+      // Fallback to mock for demo
+      console.warn('API signin failed, using mock:', error);
+      
+      const user: User = {
+        id: `user_${Date.now()}`,
+        email,
+        full_name: email.split('@')[0],
+        created_at: new Date().toISOString(),
+        onboarding_completed: false
+      };
 
-    const token = `token_${Date.now()}`;
+      const token = `token_${Date.now()}`;
 
-    // Store in localStorage
-    localStorage.setItem(this.TOKEN_KEY, token);
-    localStorage.setItem(this.USER_KEY, JSON.stringify(user));
-    localStorage.setItem('careerwise_needs_onboarding', 'true');
+      localStorage.setItem(this.TOKEN_KEY, token);
+      localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+      localStorage.setItem('careerwise_needs_onboarding', 'true');
 
-    return { user, token };
+      return { user, token };
+    }
   }
 
   // Sign out
   async signOut(): Promise<void> {
+    try {
+      await apiClient.signOut();
+    } catch (error) {
+      console.warn('API signout failed:', error);
+    }
+    
+    // Clear local storage
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.USER_KEY);
     localStorage.removeItem(this.PROFILE_KEY);
     localStorage.removeItem('careerwise_needs_onboarding');
     localStorage.removeItem('careerwise_onboarding_completed');
+    
+    // Clear API client token
+    apiClient.clearToken();
   }
 
   // Check if user is authenticated
@@ -114,58 +151,97 @@ class AuthService {
 
   // Get user profile
   async getProfile(): Promise<UserProfile | null> {
-    const profileStr = localStorage.getItem(this.PROFILE_KEY);
-    if (profileStr) {
-      try {
-        return JSON.parse(profileStr);
-      } catch (error) {
-        console.error('Error parsing profile data:', error);
-        return null;
+    try {
+      const response = await apiClient.getProfile();
+      return response.profile || response;
+    } catch (error) {
+      console.warn('API getProfile failed, using local storage:', error);
+      
+      const profileStr = localStorage.getItem(this.PROFILE_KEY);
+      if (profileStr) {
+        try {
+          return JSON.parse(profileStr);
+        } catch (error) {
+          console.error('Error parsing profile data:', error);
+          return null;
+        }
       }
+      return null;
     }
-    return null;
   }
 
   // Update user profile
   async updateProfile(profileData: Partial<UserProfile>): Promise<UserProfile> {
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 500));
+    try {
+      const response = await apiClient.updateProfile(profileData);
+      const updatedProfile = response.profile;
+      
+      // Store updated profile locally
+      localStorage.setItem(this.PROFILE_KEY, JSON.stringify(updatedProfile));
+      
+      // If onboarding is completed, update user as well
+      if (profileData.onboarding_completed) {
+        const currentUser = this.getCurrentUser();
+        if (currentUser) {
+          const updatedUser = {
+            ...currentUser,
+            onboarding_completed: true,
+            user_type: profileData.user_type as any
+          };
+          localStorage.setItem(this.USER_KEY, JSON.stringify(updatedUser));
+        }
+      }
+      
+      return updatedProfile;
+    } catch (error) {
+      console.warn('API updateProfile failed, using local storage:', error);
+      
+      // Fallback to local storage
+      const currentUser = this.getCurrentUser();
+      if (!currentUser) {
+        throw new Error('No authenticated user');
+      }
 
-    const currentUser = this.getCurrentUser();
-    if (!currentUser) {
-      throw new Error('No authenticated user');
-    }
+      const existingProfile = await this.getProfile();
 
-    const existingProfile = await this.getProfile();
-
-    const updatedProfile: UserProfile = {
-      id: currentUser.id,
-      full_name: currentUser.full_name,
-      email: currentUser.email,
-      ...existingProfile,
-      ...profileData
-    };
-
-    // Store updated profile
-    localStorage.setItem(this.PROFILE_KEY, JSON.stringify(updatedProfile));
-
-    // If onboarding is completed, update user as well
-    if (profileData.onboarding_completed) {
-      const updatedUser = {
-        ...currentUser,
-        onboarding_completed: true,
-        user_type: profileData.user_type as any
+      const updatedProfile: UserProfile = {
+        id: currentUser.id,
+        full_name: currentUser.full_name,
+        email: currentUser.email,
+        ...existingProfile,
+        ...profileData
       };
-      localStorage.setItem(this.USER_KEY, JSON.stringify(updatedUser));
-    }
 
-    return updatedProfile;
+      localStorage.setItem(this.PROFILE_KEY, JSON.stringify(updatedProfile));
+
+      if (profileData.onboarding_completed) {
+        const updatedUser = {
+          ...currentUser,
+          onboarding_completed: true,
+          user_type: profileData.user_type as any
+        };
+        localStorage.setItem(this.USER_KEY, JSON.stringify(updatedUser));
+      }
+
+      return updatedProfile;
+    }
   }
 
   // Get token
   getToken(): string | null {
     return localStorage.getItem(this.TOKEN_KEY);
   }
+  
+  // Initialize API client token
+  initializeApiClient() {
+    const token = this.getToken();
+    if (token) {
+      apiClient.setToken(token);
+    }
+  }
 }
 
 export const authService = new AuthService();
+
+// Initialize API client with stored token
+authService.initializeApiClient();

@@ -1,4 +1,5 @@
 // Interview Service for managing sessions and analysis
+import { apiClient } from '../lib/api';
 
 export interface LiveMetrics {
   timestamp: number;
@@ -68,6 +69,7 @@ class InterviewService {
   private analysisInterval: NodeJS.Timeout | null = null;
   private tipInterval: NodeJS.Timeout | null = null;
   private sessionStartTime: Date | null = null;
+  private currentSessionId: string | null = null;
   private currentMetrics: LiveMetrics = {
     timestamp: 0,
     eyeContact: 75,
@@ -116,6 +118,15 @@ class InterviewService {
     tipIntensity?: 'low' | 'medium' | 'high';
   } = {}): Promise<{ success: boolean; error?: string; stream?: MediaStream }> {
     try {
+      // Start backend session
+      const sessionId = `session_${Date.now()}`;
+      await apiClient.startInterviewSession({
+        session_id: sessionId,
+        user_id: 'demo_user',
+        interview_type: 'job',
+        settings: options
+      });
+      
       const constraints: MediaStreamConstraints = {
         video: options.videoDeviceId 
           ? { deviceId: { exact: options.videoDeviceId } }
@@ -130,6 +141,7 @@ class InterviewService {
       this.sessionStartTime = new Date();
       this.collectedMetrics = [];
       this.timestampedFlags = [];
+      this.currentSessionId = sessionId;
 
       // Start recording if enabled
       if (options.enableRecording) {
@@ -283,6 +295,15 @@ class InterviewService {
   }
 
   async endSession(): Promise<SessionReport> {
+    try {
+      // End backend session if we have one
+      if (this.currentSessionId) {
+        await apiClient.endInterviewSession(this.currentSessionId);
+      }
+    } catch (error) {
+      console.warn('Failed to end backend session:', error);
+    }
+    
     // Stop analysis
     if (this.analysisInterval) {
       clearInterval(this.analysisInterval);
