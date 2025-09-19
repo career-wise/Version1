@@ -165,6 +165,13 @@ class SpeechAnalyzer:
             except:
                 return None
     
+        except sr.UnknownValueError:
+            # Speech was unintelligible - return None
+            return None
+        except Exception as e:
+            # Any other error - return None
+            self.logger.warning(f"Speech recognition error: {e}")
+            return None
     def _analyze_content(self, text: str) -> ContentMetrics:
         """Analyze speech content quality"""
         

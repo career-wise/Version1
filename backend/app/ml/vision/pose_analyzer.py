@@ -48,7 +48,42 @@ class PoseAnalyzer:
         )
         
         # Pose landmarks for analysis
-        self.pose_landmarks = self.mp_pose.PoseLandmarks
+        # MediaPipe pose landmark indices
+        self.POSE_LANDMARKS = {
+            'NOSE': 0,
+            'LEFT_EYE_INNER': 1,
+            'LEFT_EYE': 2,
+            'LEFT_EYE_OUTER': 3,
+            'RIGHT_EYE_INNER': 4,
+            'RIGHT_EYE': 5,
+            'RIGHT_EYE_OUTER': 6,
+            'LEFT_EAR': 7,
+            'RIGHT_EAR': 8,
+            'MOUTH_LEFT': 9,
+            'MOUTH_RIGHT': 10,
+            'LEFT_SHOULDER': 11,
+            'RIGHT_SHOULDER': 12,
+            'LEFT_ELBOW': 13,
+            'RIGHT_ELBOW': 14,
+            'LEFT_WRIST': 15,
+            'RIGHT_WRIST': 16,
+            'LEFT_PINKY': 17,
+            'RIGHT_PINKY': 18,
+            'LEFT_INDEX': 19,
+            'RIGHT_INDEX': 20,
+            'LEFT_THUMB': 21,
+            'RIGHT_THUMB': 22,
+            'LEFT_HIP': 23,
+            'RIGHT_HIP': 24,
+            'LEFT_KNEE': 25,
+            'RIGHT_KNEE': 26,
+            'LEFT_ANKLE': 27,
+            'RIGHT_ANKLE': 28,
+            'LEFT_HEEL': 29,
+            'RIGHT_HEEL': 30,
+            'LEFT_FOOT_INDEX': 31,
+            'RIGHT_FOOT_INDEX': 32
+        }
         
         # Historical data for movement analysis
         self.pose_history = []
@@ -129,7 +164,9 @@ class PoseAnalyzer:
         ]
         
         for point_name in key_points:
-            point = getattr(self.pose_landmarks, point_name)
+            point_index = self.POSE_LANDMARKS.get(point_name)
+            if point_index is None:
+                continue
             landmark = pose_landmarks.landmark[point]
             landmarks[point_name.lower()] = (landmark.x, landmark.y, landmark.z)
             
@@ -137,6 +174,10 @@ class PoseAnalyzer:
     
     def _calibrate_baseline(self, landmarks: Dict):
         """Calibrate baseline posture for comparison"""
+        # Simplified baseline calibration
+        if self.baseline_posture is None and landmarks:
+            self.baseline_posture = landmarks.copy()
+        self.calibration_frames += 1
         if self.baseline_posture is None:
             self.baseline_posture = landmarks.copy()
         else:

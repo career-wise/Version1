@@ -53,7 +53,6 @@ class FaceAnalyzer:
             'right_eye': [362, 382, 381, 380, 374, 373, 390, 249, 263, 466, 388, 387, 386, 385, 384, 398]
         }
         
-        self.mouth_landmarks = [61, 84, 17, 314, 405, 320, 307, 375, 321, 308, 324, 318]
         
         # Historical data
         self.face_history = []
@@ -160,6 +159,12 @@ class FaceAnalyzer:
     
     def _calibrate_baseline(self, landmarks: Dict):
         """Calibrate baseline gaze direction"""
+        # Simplified baseline calibration
+        if landmarks and 'nose_tip' in landmarks:
+            gaze_vector = self._calculate_gaze_direction(landmarks)
+            if self.baseline_gaze is None:
+                self.baseline_gaze = gaze_vector
+        self.calibration_frames += 1
         # Calculate current gaze direction
         gaze_vector = self._calculate_gaze_direction(landmarks)
         

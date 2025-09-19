@@ -239,14 +239,26 @@ class MultimodalAnalyzer:
     
     async def _initialize_analyzers(self, session_config: Dict):
         """Initialize all analyzer components"""
-        init_tasks = [
-            self.pose_analyzer.initialize(),
-            self.face_analyzer.initialize(),
-            self.speech_analyzer.initialize(),
-            self.voice_analyzer.initialize()
-        ]
-        
-        await asyncio.gather(*init_tasks)
+        # Initialize analyzers individually to handle errors gracefully
+        try:
+            await self.pose_analyzer.initialize()
+        except Exception as e:
+            self.logger.warning(f"Pose analyzer initialization failed: {e}")
+            
+        try:
+            await self.face_analyzer.initialize()
+        except Exception as e:
+            self.logger.warning(f"Face analyzer initialization failed: {e}")
+            
+        try:
+            await self.speech_analyzer.initialize()
+        except Exception as e:
+            self.logger.warning(f"Speech analyzer initialization failed: {e}")
+            
+        try:
+            await self.voice_analyzer.initialize()
+        except Exception as e:
+            self.logger.warning(f"Voice analyzer initialization failed: {e}")
     
     def get_performance_metrics(self) -> Dict:
         """Get current performance metrics"""

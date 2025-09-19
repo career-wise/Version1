@@ -263,6 +263,11 @@ class VoiceAnalyzer:
     
     def _calibrate_baseline(self, voice_metrics: VoiceMetrics):
         """Calibrate baseline voice characteristics"""
+        # Simplified baseline calibration
+        if self.baseline_pitch is None:
+            self.baseline_pitch = voice_metrics.pitch_mean
+            self.baseline_volume = voice_metrics.volume_level
+        self.calibration_frames += 1
         if self.baseline_pitch is None:
             self.baseline_pitch = voice_metrics.pitch_mean
             self.baseline_volume = voice_metrics.volume_level
