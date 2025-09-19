@@ -1,0 +1,207 @@
+# Docker Compose for ML Interview Analysis Service
+# Production-ready deployment with monitoring and scaling
+
+version: '3.8'
+
+services:
+  # ML Model Server
+  ml-server:
+    build:
+      context: ../../..
+      dockerfile: backend/app/ml/deployment/docker/Dockerfile.ml
+    container_name: interview-ml-server
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+    environment:
+      - ENVIRONMENT=production
+      - DEBUG=false
+      - MAX_CONCURRENT_SESSIONS=10
+      - ANALYSIS_INTERVAL=1.0
+      - ENABLE_GPU=true
+      - REDIS_URL=redis://redis:6379
+      - LOG_LEVEL=INFO
+    volumes:
+      - ml_models:/app/models
+      - ml_data:/app/data
+      - ml_logs:/app/logs
+      - ml_temp:/app/temp
+    depends_on:
+      - redis
+      - prometheus
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+        limits:
+          memory: 8G
+          cpus: '4'
+    networks:
+      - ml-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # Redis for session management
+  redis:
+    image: redis:7-alpine
+    container_name: interview-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes --maxmemory 1gb --maxmemory-policy allkeys-lru
+    networks:
+      - ml-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # Prometheus for monitoring
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: interview-prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    networks:
+      - ml-network
+
+  # Grafana for visualization
+  grafana:
+    image: grafana/grafana:latest
+    container_name: interview-grafana
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin123
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources
+    networks:
+      - ml-network
+    depends_on:
+      - prometheus
+
+  # Load balancer (for scaling)
+  nginx:
+    image: nginx:alpine
+    container_name: interview-nginx
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - ml-server
+    networks:
+      - ml-network
+
+  # Model evaluation service (optional)
+  model-evaluator:
+    build:
+      context: ../../..
+      dockerfile: backend/app/ml/deployment/docker/Dockerfile.ml
+    container_name: interview-evaluator
+    restart: "no"
+    environment:
+      - ENVIRONMENT=evaluation
+      - EVALUATION_MODE=true
+    volumes:
+      - ml_models:/app/models
+      - ml_data:/app/data
+      - evaluation_results:/app/evaluation
+    command: ["python3.9", "-m", "app.ml.evaluation.model_evaluator"]
+    networks:
+      - ml-network
+    profiles:
+      - evaluation
+
+volumes:
+  ml_models:
+    driver: local
+  ml_data:
+    driver: local
+  ml_logs:
+    driver: local
+  ml_temp:
+    driver: local
+  redis_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+  evaluation_results:
+    driver: local
+
+networks:
+  ml-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+# Production scaling configuration
+x-ml-server-template: &ml-server-template
+  build:
+    context: ../../..
+    dockerfile: backend/app/ml/deployment/docker/Dockerfile.ml
+  restart: unless-stopped
+  environment:
+    - ENVIRONMENT=production
+    - DEBUG=false
+    - REDIS_URL=redis://redis:6379
+  volumes:
+    - ml_models:/app/models
+    - ml_data:/app/data
+    - ml_logs:/app/logs
+  depends_on:
+    - redis
+  networks:
+    - ml-network
+  deploy:
+    resources:
+      reservations:
+        devices:
+          - driver: nvidia
+            count: 1
+            capabilities: [gpu]
+      limits:
+        memory: 8G
+        cpus: '4'
+
+# Additional ML server instances for scaling (uncomment as needed)
+# ml-server-2:
+#   <<: *ml-server-template
+#   container_name: interview-ml-server-2
+#   ports:
+#     - "8002:8001"
+
+# ml-server-3:
+#   <<: *ml-server-template
+#   container_name: interview-ml-server-3
+#   ports:
+#     - "8003:8001"

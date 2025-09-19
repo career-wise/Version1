@@ -1,0 +1,252 @@
+{
+  "body_language": {
+    "excellent": {
+      "strengths": [
+        "Outstanding professional presence and confident body language",
+        "Excellent posture maintained throughout the interview",
+        "Natural and appropriate use of hand gestures",
+        "Strong eye contact demonstrating engagement and confidence",
+        "Relaxed and open body positioning"
+      ],
+      "suggestions": [
+        "Continue practicing to maintain this excellent standard",
+        "Consider varying your gestures slightly for even more natural presentation",
+        "Your body language is interview-ready - focus on other areas"
+      ]
+    },
+    "good": {
+      "strengths": [
+        "Good overall body language with professional appearance",
+        "Maintained good posture for most of the interview",
+        "Appropriate eye contact and engagement",
+        "Natural hand movements and gestures"
+      ],
+      "improvements": [
+        "Minor adjustments to posture consistency",
+        "Slightly more consistent eye contact"
+      ],
+      "suggestions": [
+        "Practice maintaining posture for longer periods",
+        "Work on eye contact consistency during longer responses",
+        "Record yourself to identify any unconscious habits"
+      ]
+    },
+    "fair": {
+      "improvements": [
+        "Posture and body positioning",
+        "Eye contact consistency",
+        "Hand and arm positioning"
+      ],
+      "suggestions": [
+        "Practice sitting up straight with shoulders back",
+        "Work on maintaining eye contact with the camera",
+        "Keep hands visible and avoid crossing arms",
+        "Practice in front of a mirror to build awareness",
+        "Do posture exercises to build muscle memory"
+      ]
+    },
+    "poor": {
+      "improvements": [
+        "Overall body language and professional presence",
+        "Posture and positioning",
+        "Eye contact and engagement signals"
+      ],
+      "suggestions": [
+        "Focus on basic posture fundamentals",
+        "Practice maintaining eye contact for 3-5 seconds at a time",
+        "Work on keeping an open, confident posture",
+        "Consider working with a presentation coach",
+        "Start with short practice sessions to build habits"
+      ]
+    }
+  },
+  "vocal_delivery": {
+    "excellent": {
+      "strengths": [
+        "Clear and confident vocal delivery",
+        "Perfect speaking pace that's easy to follow",
+        "Excellent voice projection and clarity",
+        "Natural vocal variety and intonation",
+        "Minimal filler words and vocal hesitations"
+      ],
+      "suggestions": [
+        "Your vocal delivery is excellent - maintain this standard",
+        "Consider practicing with different question types to maintain consistency",
+        "Your voice conveys confidence and professionalism"
+      ]
+    },
+    "good": {
+      "strengths": [
+        "Clear and understandable speech",
+        "Good speaking pace overall",
+        "Confident voice projection",
+        "Appropriate vocal tone for interview setting"
+      ],
+      "improvements": [
+        "Minor pace adjustments",
+        "Slight reduction in filler words"
+      ],
+      "suggestions": [
+        "Practice speaking at a consistent 140-160 words per minute",
+        "Work on eliminating remaining filler words",
+        "Use strategic pauses instead of 'um' and 'uh'"
+      ]
+    },
+    "fair": {
+      "improvements": [
+        "Speaking pace and rhythm",
+        "Voice clarity and projection",
+        "Reduction of filler words"
+      ],
+      "suggestions": [
+        "Practice speaking more slowly and clearly",
+        "Work on projecting your voice confidently",
+        "Record yourself to identify vocal habits",
+        "Practice breathing exercises for better voice control",
+        "Use a metronome to practice consistent pacing"
+      ]
+    },
+    "poor": {
+      "improvements": [
+        "Overall vocal delivery and clarity",
+        "Speaking pace control",
+        "Voice confidence and projection"
+      ],
+      "suggestions": [
+        "Focus on speaking clearly and at a moderate pace",
+        "Practice vocal exercises to improve clarity",
+        "Work on reducing nervous vocal habits",
+        "Consider voice coaching or speech therapy",
+        "Practice with tongue twisters to improve articulation"
+      ]
+    }
+  },
+  "content_quality": {
+    "excellent": {
+      "strengths": [
+        "Excellent content structure and organization",
+        "Compelling and relevant examples provided",
+        "Clear and logical flow of ideas",
+        "Strong vocabulary and professional language",
+        "Minimal filler words and excellent clarity"
+      ],
+      "suggestions": [
+        "Your content quality is outstanding",
+        "Continue preparing specific examples for different question types",
+        "Consider helping others practice - you're interview-ready"
+      ]
+    },
+    "good": {
+      "strengths": [
+        "Well-structured responses with good examples",
+        "Clear communication of ideas",
+        "Appropriate professional language",
+        "Good use of specific details"
+      ],
+      "improvements": [
+        "Adding more specific metrics to examples",
+        "Slightly better response organization"
+      ],
+      "suggestions": [
+        "Include more quantifiable results in your examples",
+        "Practice the STAR method for even better structure",
+        "Prepare additional backup examples for each competency"
+      ]
+    },
+    "fair": {
+      "improvements": [
+        "Response structure and organization",
+        "Use of specific examples and details",
+        "Professional language and vocabulary"
+      ],
+      "suggestions": [
+        "Practice structuring responses using the STAR method",
+        "Prepare specific examples with measurable outcomes",
+        "Work on reducing filler words and improving clarity",
+        "Practice transitioning smoothly between points",
+        "Develop a bank of compelling stories and examples"
+      ]
+    },
+    "poor": {
+      "improvements": [
+        "Overall response quality and structure",
+        "Content relevance and specificity",
+        "Communication clarity and organization"
+      ],
+      "suggestions": [
+        "Focus on basic response structure using STAR method",
+        "Prepare and practice specific examples for common questions",
+        "Work on speaking more clearly and reducing filler words",
+        "Practice organizing thoughts before speaking",
+        "Consider working with a career counselor for content development"
+      ]
+    }
+  },
+  "live_tips": {
+    "body_language": [
+      "Great posture! Keep it up",
+      "Try to maintain eye contact with the camera",
+      "Relax your shoulders and sit up straight",
+      "Keep your hands visible and use natural gestures",
+      "Excellent body language - you look confident"
+    ],
+    "vocal": [
+      "Perfect speaking pace - very clear",
+      "Try to slow down slightly for better clarity",
+      "Great voice projection and confidence",
+      "Consider pausing instead of using filler words",
+      "Excellent vocal delivery - keep it up"
+    ],
+    "content": [
+      "Well-structured response with good examples",
+      "Try to include more specific details",
+      "Great use of the STAR method",
+      "Consider adding quantifiable results to your example",
+      "Excellent content - very compelling"
+    ],
+    "general": [
+      "You're doing great - stay confident",
+      "Take a moment to collect your thoughts",
+      "Remember to breathe and stay relaxed",
+      "Excellent interview skills on display",
+      "Keep up the professional presentation"
+    ]
+  },
+  "improvement_priorities": {
+    "beginner": [
+      "Basic posture and eye contact",
+      "Clear speech and appropriate pace",
+      "Simple response structure"
+    ],
+    "intermediate": [
+      "Consistent professional presence",
+      "Advanced vocal techniques",
+      "STAR method mastery"
+    ],
+    "advanced": [
+      "Subtle body language optimization",
+      "Advanced storytelling techniques",
+      "Executive presence development"
+    ]
+  },
+  "success_metrics": {
+    "body_language": {
+      "posture_score": 80,
+      "eye_contact_score": 85,
+      "gesture_appropriateness": 75,
+      "overall_presence": 80
+    },
+    "vocal_delivery": {
+      "speaking_rate": [140, 160],
+      "voice_clarity": 80,
+      "filler_word_rate": 3,
+      "vocal_confidence": 80
+    },
+    "content_quality": {
+      "structure_score": 80,
+      "relevance_score": 85,
+      "example_quality": 80,
+      "vocabulary_diversity": 70
+    }
+  }
+}

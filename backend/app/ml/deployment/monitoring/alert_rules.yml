@@ -1,0 +1,163 @@
+# Prometheus alerting rules for ML service
+# Comprehensive alerts for performance and reliability monitoring
+
+groups:
+  - name: ml_service_alerts
+    rules:
+      # High CPU usage
+      - alert: HighCPUUsage
+        expr: cpu_usage_percent > 80
+        for: 2m
+        labels:
+          severity: warning
+          service: ml-server
+        annotations:
+          summary: "High CPU usage detected"
+          description: "CPU usage is {{ $value }}% for more than 2 minutes"
+          
+      # High memory usage
+      - alert: HighMemoryUsage
+        expr: memory_usage_percent > 85
+        for: 1m
+        labels:
+          severity: critical
+          service: ml-server
+        annotations:
+          summary: "High memory usage detected"
+          description: "Memory usage is {{ $value }}% for more than 1 minute"
+          
+      # High processing latency
+      - alert: HighProcessingLatency
+        expr: processing_latency_ms > 200
+        for: 30s
+        labels:
+          severity: warning
+          service: ml-server
+        annotations:
+          summary: "High processing latency detected"
+          description: "Processing latency is {{ $value }}ms for more than 30 seconds"
+          
+      # Low throughput
+      - alert: LowThroughput
+        expr: analysis_throughput_fps < 10
+        for: 1m
+        labels:
+          severity: warning
+          service: ml-server
+        annotations:
+          summary: "Low analysis throughput"
+          description: "Analysis throughput is {{ $value }} FPS for more than 1 minute"
+          
+      # High error rate
+      - alert: HighErrorRate
+        expr: error_rate_per_second > 0.1
+        for: 30s
+        labels:
+          severity: critical
+          service: ml-server
+        annotations:
+          summary: "High error rate detected"
+          description: "Error rate is {{ $value }} errors/second for more than 30 seconds"
+          
+      # Service down
+      - alert: MLServiceDown
+        expr: up{job="ml-server"} == 0
+        for: 30s
+        labels:
+          severity: critical
+          service: ml-server
+        annotations:
+          summary: "ML service is down"
+          description: "ML service has been down for more than 30 seconds"
+          
+      # GPU utilization (if available)
+      - alert: LowGPUUtilization
+        expr: gpu_utilization_percent < 20
+        for: 5m
+        labels:
+          severity: info
+          service: ml-server
+        annotations:
+          summary: "Low GPU utilization"
+          description: "GPU utilization is {{ $value }}% - consider CPU-only deployment"
+          
+      # Model accuracy degradation
+      - alert: ModelAccuracyDegradation
+        expr: model_accuracy < 0.8
+        for: 2m
+        labels:
+          severity: warning
+          service: ml-server
+        annotations:
+          summary: "Model accuracy degradation detected"
+          description: "Model accuracy has dropped to {{ $value }}"
+          
+      # Session queue backup
+      - alert: SessionQueueBackup
+        expr: active_sessions_count > 8
+        for: 1m
+        labels:
+          severity: warning
+          service: ml-server
+        annotations:
+          summary: "High number of active sessions"
+          description: "{{ $value }} active sessions - consider scaling up"
+
+  - name: infrastructure_alerts
+    rules:
+      # Redis connection issues
+      - alert: RedisConnectionFailed
+        expr: redis_connected_clients == 0
+        for: 30s
+        labels:
+          severity: critical
+          service: redis
+        annotations:
+          summary: "Redis connection failed"
+          description: "No Redis clients connected for more than 30 seconds"
+          
+      # Disk space
+      - alert: LowDiskSpace
+        expr: disk_usage_percent > 85
+        for: 1m
+        labels:
+          severity: warning
+          service: system
+        annotations:
+          summary: "Low disk space"
+          description: "Disk usage is {{ $value }}% for more than 1 minute"
+          
+      # Network issues
+      - alert: HighNetworkLatency
+        expr: network_latency_ms > 100
+        for: 2m
+        labels:
+          severity: warning
+          service: network
+        annotations:
+          summary: "High network latency"
+          description: "Network latency is {{ $value }}ms for more than 2 minutes"
+
+  - name: business_metrics_alerts
+    rules:
+      # User experience degradation
+      - alert: UserExperienceDegradation
+        expr: average_user_satisfaction_score < 4.0
+        for: 5m
+        labels:
+          severity: warning
+          service: user-experience
+        annotations:
+          summary: "User experience degradation"
+          description: "Average user satisfaction is {{ $value }}/5.0"
+          
+      # Model confidence drop
+      - alert: ModelConfidenceDrop
+        expr: average_model_confidence < 0.7
+        for: 3m
+        labels:
+          severity: warning
+          service: ml-model
+        annotations:
+          summary: "Model confidence drop"
+          description: "Average model confidence is {{ $value }}"
