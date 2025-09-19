@@ -12,6 +12,8 @@ from fastapi import FastAPI, WebSocket, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import redis
 from contextlib import asynccontextmanager
+import json
+import numpy as np
 
 from app.ml.core.multimodal_analyzer import MultimodalAnalyzer
 from app.ml.config.ml_config import ml_config

@@ -12,12 +12,12 @@ import cv2
 from dataclasses import dataclass
 from concurrent.futures import ThreadPoolExecutor
 
-from .vision.pose_analyzer import PoseAnalyzer
-from .vision.face_analyzer import FaceAnalyzer
-from .audio.speech_analyzer import SpeechAnalyzer
-from .audio.voice_analyzer import VoiceAnalyzer
-from .fusion.feedback_generator import FeedbackGenerator
-from .utils.performance_monitor import PerformanceMonitor
+from app.ml.vision.pose_analyzer import PoseAnalyzer
+from app.ml.vision.face_analyzer import FaceAnalyzer
+from app.ml.audio.speech_analyzer import SpeechAnalyzer
+from app.ml.audio.voice_analyzer import VoiceAnalyzer
+from app.ml.fusion.feedback_generator import FeedbackGenerator
+from app.ml.utils.performance_monitor import PerformanceMonitor
 
 @dataclass
 class AnalysisFrame:

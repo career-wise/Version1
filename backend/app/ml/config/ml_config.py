@@ -6,6 +6,7 @@ Centralized configuration for all ML components
 import os
 from typing import Dict, Any
 from dataclasses import dataclass
+from typing import Optional
 
 @dataclass
 class ModelConfig:

@@ -9,6 +9,7 @@ import mediapipe as mp
 from typing import Dict, List, Optional, Tuple
 import math
 from dataclasses import dataclass
+import time
 
 @dataclass
 class PostureMetrics:

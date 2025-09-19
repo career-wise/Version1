@@ -10,6 +10,7 @@ from typing import Dict, List, Optional, Tuple
 import math
 import time
 from dataclasses import dataclass
+import time
 
 @dataclass
 class EyeContactMetrics:

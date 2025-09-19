@@ -13,6 +13,8 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 from scipy.stats import pearsonr, spearmanr
 import logging
+import time
+import asyncio
 
 from app.ml.core.multimodal_analyzer import MultimodalAnalyzer
 from app.ml.config.ml_config import ml_config
