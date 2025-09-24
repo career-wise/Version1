@@ -191,7 +191,7 @@ const StudentDashboardHome: React.FC = () => {
               <Sparkles className="h-7 w-7 text-white" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold">Welcome back, Demo Student! 👋</h1>
+              <h1 className="text-3xl font-bold">Welcome back, Student! 👋</h1>
               <p className="text-primary-100 text-lg">Ready to accelerate your career journey?</p>
             </div>
           </div>
