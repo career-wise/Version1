@@ -25,7 +25,6 @@ import {
   useKeyboardShortcuts,
   commonShortcuts,
 } from "./hooks/useKeyboardShortcuts";
-import { authService } from "./lib/auth";
 
 // Landing Page Component
 const LandingPage: React.FC = () => {
@@ -55,27 +54,13 @@ const OnboardingPage: React.FC = () => {
     try {
       console.log("🎉 Onboarding completed with data:", data);
 
-      // Update the user's profile with onboarding data
-      await authService.updateProfile({
-        user_type: data.userType,
-        career_stage: data.careerStage,
-        experience_level: data.experienceLevel,
-        primary_goals: data.primaryGoals,
-        industry_interests: data.industryInterests,
-        skills: data.skills || [],
-        linkedin_url: data.linkedinUrl || null,
-        portfolio_url: data.portfolioUrl || null,
-        bio: data.bio || null,
-        location: data.location || null,
-        onboarding_completed: true,
-      });
 
       localStorage.setItem("careerwise_onboarding_completed", "true");
       localStorage.removeItem("careerwise_needs_onboarding");
       localStorage.setItem("careerwise_user_profile", JSON.stringify(data));
 
       success(
-        "Welcome to Careerist!",
+        "Welcome to CareerWise!",
         "Your profile has been set up successfully."
       );
       navigate("/student-dashboard");
@@ -118,21 +103,19 @@ function App() {
   ]);
 
   return (
-    <UserProvider>
-      <Router>
-        <div className="min-h-screen bg-white font-sans">
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/chat" element={<ChatPage />} />
-            <Route path="/auth" element={<AuthPage />} />
-            <Route path="/onboarding" element={<OnboardingPage />} />
-            <Route path="/student-dashboard/*" element={<StudentDashboard />} />
-            <Route path="/dashboard/*" element={<DashboardLayout />} />
-          </Routes>
-          <ToastContainer toasts={toasts} onRemove={removeToast} />
-        </div>
-      </Router>
-    </UserProvider>
+    <Router>
+      <div className="min-h-screen bg-white font-sans">
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/chat" element={<ChatPage />} />
+          <Route path="/auth" element={<AuthPage />} />
+          <Route path="/onboarding" element={<OnboardingPage />} />
+          <Route path="/student-dashboard/*" element={<StudentDashboard />} />
+          <Route path="/dashboard/*" element={<DashboardLayout />} />
+        </Routes>
+        <ToastContainer toasts={toasts} onRemove={removeToast} />
+      </div>
+    </Router>
   );
 }
 

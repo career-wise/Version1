@@ -3,36 +3,22 @@ import { Routes, Route } from "react-router-dom";
 import StudentSidebar from "./StudentSidebar";
 import StudentDashboardHome from "./StudentDashboardHome";
 
-// Exploration Components
-import CareerExplorer from "../exploration/CareerExplorer";
-
-// Academic Components
-import SubjectExplorer from "../study&succeed/SubjectExplorer";
-import StudySkillsTrainer from "../study&succeed/StudySkillsTrainer";
-import TestPrepStrategies from "../study&succeed/TestPrepStrategies";
-
-
-// College Components
+// Components that exist
 import CollegeExplorer from "../explorer&discover/CollegeExplorer";
 import MajorExplorer from "../explorer&discover/MajorExplorer";
-
-// Skills Components
 import BasicTechSkills from "../learn&develop/BasicTechSkills";
 import SoftSkills from "../learn&develop/SoftSkills";
 import CreativeSkills from "../learn&develop/CreativeSkills";
 import OnlineCourses from "../learn&develop/OnlineCourses";
 import ProjectIdeas from "../learn&develop/ProjectIdeas";
-
-// Learning Components
 import InterviewPreparation from "../prepareforfuture/InterviewPreparation";
-
-// Planning Components
-import CareerPathPlanner from "../planning/CareerPathPlanner";
+import CareerPathPlanner from "../prepareforfuture/CareerPathPlanner";
 import { GoalSetting } from "../study&succeed/GoalSetting";
-
-// Resources Components
 import StudyResources from "../study&succeed/StudyResources";
 import DocumentManager from "../resources/DocumentManager";
+import SubjectExplorer from "../study&succeed/SubjectExplorer";
+import StudySkillsTrainer from "../study&succeed/StudySkillsTrainer";
+import TestPrepStrategies from "../study&succeed/TestPrepStrategies";
 
 const StudentDashboard: React.FC = () => {
   return (
@@ -43,16 +29,11 @@ const StudentDashboard: React.FC = () => {
         <Routes>
           <Route path="/" element={<StudentDashboardHome />} />
 
-          {/* Exploration Routes */}
           {/* Academic Routes */}
-          <Route
-            path="/academics/subject-explorer"
-            element={<SubjectExplorer />}
-          />
           <Route path="/academics/study-skills" element={<StudySkillsTrainer />} />
-
           <Route path="/academics/test-prep" element={<TestPrepStrategies />} />
           <Route path="/resources/study" element={<StudyResources />} />
+          <Route path="/academics/study-resources" element={<StudyResources />} />
 
           {/* College Routes */}
           <Route path="/college/explorer" element={<CollegeExplorer />} />
@@ -66,11 +47,7 @@ const StudentDashboard: React.FC = () => {
           {/* Learning Routes */}
           <Route path="/learning/courses" element={<OnlineCourses />} />
           <Route path="/learning/projects" element={<ProjectIdeas />} />
-
-          <Route
-            path="/learning/interview-prep"
-            element={<InterviewPreparation />}
-          />
+          <Route path="/learning/interview-prep" element={<InterviewPreparation />} />
 
           {/* Planning Routes */}
           <Route path="/planning/career-path" element={<CareerPathPlanner />} />
@@ -78,7 +55,6 @@ const StudentDashboard: React.FC = () => {
           
           {/* Resources Routes */}
           <Route path="/resources/document-manager" element={<DocumentManager />} />
-
         </Routes>
       </div>
     </div>
