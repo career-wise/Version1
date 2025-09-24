@@ -26,7 +26,6 @@ import {
   commonShortcuts,
 } from "./hooks/useKeyboardShortcuts";
 import { authService } from "./lib/auth";
-import { UserProvider } from "./contexts/UserContext";
 
 // Landing Page Component
 const LandingPage: React.FC = () => {

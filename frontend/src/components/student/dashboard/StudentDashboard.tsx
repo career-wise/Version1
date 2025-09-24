@@ -7,32 +7,31 @@ import StudentDashboardHome from "./StudentDashboardHome";
 import CareerExplorer from "../exploration/CareerExplorer";
 
 // Academic Components
-import SubjectExplorer from "../academics/SubjectExplorer";
-import StudySkillsTrainer from "../academics/StudySkillsTrainer";
-import TestPrepStrategies from "../academics/TestPrepStrategies";
-import AcademicGoalTracker from "../academics/AcademicGoalTracker";
+import SubjectExplorer from "../study&succeed/SubjectExplorer";
+import StudySkillsTrainer from "../study&succeed/StudySkillsTrainer";
+import TestPrepStrategies from "../study&succeed/TestPrepStrategies";
+
 
 // College Components
-import CollegeExplorer from "../college/CollegeExplorer";
-import MajorExplorer from "../college/MajorExplorer";
+import CollegeExplorer from "../explorer&discover/CollegeExplorer";
+import MajorExplorer from "../explorer&discover/MajorExplorer";
 
 // Skills Components
-import SkillDiscovery from "../skills/SkillDiscovery";
-import BasicTechSkills from "../skills/BasicTechSkills";
-import SoftSkills from "../skills/SoftSkills";
-import CreativeSkills from "../skills/CreativeSkills";
+import BasicTechSkills from "../learn&develop/BasicTechSkills";
+import SoftSkills from "../learn&develop/SoftSkills";
+import CreativeSkills from "../learn&develop/CreativeSkills";
+import OnlineCourses from "../learn&develop/OnlineCourses";
+import ProjectIdeas from "../learn&develop/ProjectIdeas";
 
 // Learning Components
-import OnlineCourses from "../learning/OnlineCourses";
-import ProjectIdeas from "../learning/ProjectIdeas";
-import InterviewPreparation from "../learning/InterviewPreparation";
+import InterviewPreparation from "../prepareforfuture/InterviewPreparation";
 
 // Planning Components
 import CareerPathPlanner from "../planning/CareerPathPlanner";
-import { GoalSetting } from "../planning/GoalSetting";
+import { GoalSetting } from "../study&succeed/GoalSetting";
 
 // Resources Components
-import StudyResources from "../resources/StudyResources";
+import StudyResources from "../study&succeed/StudyResources";
 import DocumentManager from "../resources/DocumentManager";
 
 const StudentDashboard: React.FC = () => {
@@ -53,10 +52,6 @@ const StudentDashboard: React.FC = () => {
           <Route path="/academics/study-skills" element={<StudySkillsTrainer />} />
 
           <Route path="/academics/test-prep" element={<TestPrepStrategies />} />
-          <Route
-            path="/academics/goal-tracker"
-            element={<AcademicGoalTracker />}
-          />
           <Route path="/resources/study" element={<StudyResources />} />
 
           {/* College Routes */}
@@ -64,7 +59,6 @@ const StudentDashboard: React.FC = () => {
           <Route path="/college/majors" element={<MajorExplorer />} />
 
           {/* Skills Routes */}
-          <Route path="/skills/discovery" element={<SkillDiscovery />} />
           <Route path="/skills/tech" element={<BasicTechSkills />} />
           <Route path="/skills/soft" element={<SoftSkills />} />
           <Route path="/skills/creative" element={<CreativeSkills />} />
